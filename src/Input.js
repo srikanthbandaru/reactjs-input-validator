@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import validator from 'validator'
 import {errorMessages} from './errorMessages'
+import 'bootstrap/dist/css/bootstrap.css'
 
 export default class Input extends Component {
   constructor(props) {
