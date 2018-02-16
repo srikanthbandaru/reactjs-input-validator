@@ -2,7 +2,6 @@
   "name": "reactjs-input-validator",
   "version": "0.2.0",
   "main": "build/index.js",
-
   "author": "Srikanth Bandaru <srikanthb602@gmail.com>",
   "license": "MIT",
   "repository": {
@@ -10,6 +9,7 @@
     "url": "https://github.com/SrikanthBandaru/reactjs-input-validator"
   },
   "homepage": "https://github.com/SrikanthBandaru/reactjs-input-validator#readme",
+  "description": "An input validator built for Reactjs using the awesomeness of valiidator.js",
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
