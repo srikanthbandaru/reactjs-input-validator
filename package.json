@@ -12,8 +12,8 @@
   "description": "An input validator built for Reactjs using the awesomeness of valiidator.js",
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
-    "demo": "node scripts/demo.js",
+    "build-lib": "node scripts/build.js",
+    "build-demo": "node scripts/demo.js",
     "test": "node scripts/test.js --env=jsdom"
   },
   "dependencies": {
