@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Input from './Input';
-import 'bootstrap/dist/css/bootstrap.css'
+// import 'bootstrap/dist/css/bootstrap.css'
 
 export default class App extends Component {
   render() {
