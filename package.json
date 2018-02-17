@@ -1,6 +1,6 @@
 {
   "name": "reactjs-input-validator",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "main": "build/reactjs-input-validator.js",
   "author": "Srikanth Bandaru <srikanthb602@gmail.com>",
   "license": "MIT",
@@ -12,7 +12,7 @@
   "description": "An input validator built for Reactjs using the awesomeness of valiidator.js",
   "scripts": {
     "start": "node scripts/start.js",
-    "build-lib": "node scripts/build.js",
+    "build": "node scripts/build.js",
     "build-demo": "node scripts/demo.js",
     "test": "node scripts/test.js --env=jsdom"
   },
