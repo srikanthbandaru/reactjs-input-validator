@@ -36,7 +36,7 @@ import 'reactjs-input-validator/build/css/reactjs-input-validator.css'
 ### Usage/Demo
 ```js
 import React, { Component } from 'react'
-import { Input } from '../lib';
+import { Input } from 'reactjs-input-validator';
 
 export default class App extends Component {
   constructor (){
