@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Input from './Input';
+import { Input } from '../lib';
 // import 'bootstrap/dist/css/bootstrap.css'
 
 export default class App extends Component {
