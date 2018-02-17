@@ -18,13 +18,16 @@ export default class App extends Component {
     this.setState({
       formData: formData
     })
+
+    // You can now find your form data by doing
+    console.log(this.state.formData);
   }
 
   render() {
     return (
       <div>
-        <Input validator="isEmail" name="name" onChange={this.handleChange} />
-        <Input validator="isBoolean" name="address" onChange={this.handleChange} />
+        <Input validator="isEmail" name="userEmail" onChange={this.handleChange} />
+        <Input validator="isCreditCard" name="userCreditCard" onChange={this.handleChange} />
       </div>
     )
   }
