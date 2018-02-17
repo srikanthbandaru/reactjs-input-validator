@@ -13,7 +13,10 @@ export default class Input extends Component {
   }
 
   handleInputChange(event) {
-    this.setState({inputValue: event.target.value})
+    this.setState({
+      inputValue: event.target.value
+    })
+    if(this.props.onChange) this.props.onChange(event.target.value, event.target.name);
   }
 
   handleOnBlur() {
@@ -34,18 +37,17 @@ export default class Input extends Component {
     return(
       <div>
         <input
-          class={inputClassName}
+          className={inputClassName}
           type='text'
-          id={this.props.id}
           name={this.props.name}
           value={this.state.inputValue}
           onChange={this.handleInputChange}
           onBlur={this.handleOnBlur}
         />
-        <div class="invalid-feedback">
+        <div className="invalid-feedback">
           {errorMessages[this.props.validator]}
         </div>
-        <div class="valid-feedback">
+        <div className="valid-feedback">
           Looks good!
         </div>
       </div>
@@ -55,4 +57,5 @@ export default class Input extends Component {
 
 Input.propTypes = {
   validator: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
 }
