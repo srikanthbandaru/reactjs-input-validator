@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import validator from 'validator'
 import {errorMessages} from './errorMessages'
-import 'bootstrap/dist/css/bootstrap.css'
+import './Input.css'
 
 export default class Input extends Component {
   constructor(props) {
@@ -27,12 +27,12 @@ export default class Input extends Component {
   }
 
   render() {
-    const styles = this.state.validationResult
-    ? 'is-valid'
-    :  this.state.validationResult === ''
-        ? ''
-        : 'is-invalid'
-    const inputClassName = `form-control ${this.props.className} ${styles}`
+    const styles = this.state.validationResult === true
+    ? 'valid-input'
+    :  this.state.validationResult === false
+        ? 'invalid-input'
+        : ''
+    const inputClassName = `input-validator-form-control ${this.props.className} ${styles}`
 
     return(
       <div>
@@ -44,12 +44,13 @@ export default class Input extends Component {
           onChange={this.handleInputChange}
           onBlur={this.handleOnBlur}
         />
-        <div className="invalid-feedback">
-          {errorMessages[this.props.validator]}
-        </div>
-        <div className="valid-feedback">
-          Looks good!
-        </div>
+        {
+          this.state.validationResult === true
+          ? <div className="valid-input-feedback">Looks good!</div>
+          : this.state.validationResult === false
+            ? <div className="invalid-input-feedback">{errorMessages[this.props.validator]}</div>
+            : null
+        }
       </div>
     )
   }
