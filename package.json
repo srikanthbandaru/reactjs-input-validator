@@ -1,7 +1,7 @@
 {
   "name": "reactjs-input-validator",
   "version": "0.4.0",
-  "main": "build/index.js",
+  "main": "build/reactjs-input-validator.js",
   "author": "Srikanth Bandaru <srikanthb602@gmail.com>",
   "license": "MIT",
   "repository": {
