@@ -2,6 +2,11 @@
 # ReactJS Input Validator
 Input validator for [React][react-website] with the awesomeness of [validator.js][validatorjs-website]
 
+<p align="center">
+  <a href="https://travis-ci.org/srikanthbandaru/reactjs-input-validator"><img src="https://travis-ci.org/srikanthbandaru/reactjs-input-validator.svg?branch=master" alt="travis"></a>
+  <a href="https://www.npmjs.com/package/reactjs-input-validator"><img src="https://badge.fury.io/js/reactjs-input-validator.svg" alt="npm version"></a>
+</p>
+
 ## Usage
 ### Install
 ```
