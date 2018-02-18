@@ -21,7 +21,7 @@ export const errorMessages = {
   isISO8601: 'Please enter a valid ISO 8601 date',
   isISO31661Alpha2: 'Please enter a valid ISO 3166-1 alpha-2 officially assigned country code',
   isISRC: 'Please enter a valid ISRC',
-  isInt: 'Please enter only a number',
+  isInt: 'Please enter only an integer',
   isJSON: 'Please enter a valid JSON',
   isLatLong: 'Please enter a valid latitude-longitude coordinate',
   isLowercase: 'Please enter lowercase characters only',

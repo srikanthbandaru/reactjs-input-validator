@@ -1,11 +1,16 @@
 
 # ReactJS Input Validator
-Input validator for [React][react-website] with the awesomeness of [validator.js][validatorjs-website]
 
 <p align="center">
   <a href="https://travis-ci.org/srikanthbandaru/reactjs-input-validator"><img src="https://travis-ci.org/srikanthbandaru/reactjs-input-validator.svg?branch=master" alt="travis"></a>
   <a href="https://www.npmjs.com/package/reactjs-input-validator"><img src="https://badge.fury.io/js/reactjs-input-validator.svg" alt="npm version"></a>
 </p>
+
+## Input validator for [React][react-website] with the awesomeness of [validator.js][validatorjs-website]
+This module saves you and your team in three ways.
+- **Clean code.** Every form has unique requirements. You don't have to write custom validations for every input field in your form.  
+- **No new syntax.** You don't have to deal with any weird syntax. Pass the validator that you want for your input field as a prop and... that's it!
+- **Inbuilt styles & error messages.** We even ship you the custom styles and error messages for the validation of your input fields.
 
 ## Usage
 ### Install
@@ -31,13 +36,12 @@ Finally, you need to import the CSS file into your application.
 import 'reactjs-input-validator/build/css/reactjs-input-validator.css'
 ```
 ### Props
-| Name      | Type     | Default      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-|-----------|----------|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| className | string   | form-control | Base CSS class for the component. Generally one should only change className to provide new, non-Bootstrap, CSS styles for a component.                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| name      | string   |              | The name attribute is used to reference input elements and to reference it's data.                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| onChange  | function |              | The onChange event provides an object of input values with names of inputs as their keys. ex: ```{userEmail: "john.doe@example.com", userCreditCard: "4111111111111111"}```                                                                                                                                                                                                                                                                                                                                                                                                         |
-| validator | string   |              | One of the validators from [validator.js][validatorjs-website] `["isAlpha", "isAlphanumeric", "isAscii", "isBase64", "isBoolean", "isCreditCard", "isCurrency", "isDataURI", "isDecimal", "isEmail", "isEmpty", "isFQDN", "isFloat", "isFullWidth", "isHalfWidth", "isHexColor", "isHexadecimal", "isISSN", "isISIN", "isISO8601", "isISO31661Alpha2", "isISRC", "isInt", "isJSON", "isLatLong", "isLowercase", "isMACAddress", "isMD5", "isMimeType", "isMongoId", "isMultibyte", "isNumeric", "isPort", "isSurrogatePair", "isURL", "isUUID", "isUppercase", "isVariableWidth"]` |
-
+| Name      | Type   | Default      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| --------- | ------ | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| validator | string |              | One of the validators from [validator.js][validatorjs-website] <br /> `["isAlpha", "isAlphanumeric", "isAscii", "isBase64", "isBoolean", "isCreditCard", "isCurrency", "isDataURI", "isDecimal", "isEmail", "isEmpty", "isFQDN", "isFloat", "isFullWidth", "isHalfWidth", "isHexColor", "isHexadecimal", "isISSN", "isISIN", "isISO8601", "isISO31661Alpha2", "isISRC", "isInt", "isJSON", "isLatLong", "isLowercase", "isMACAddress", "isMD5", "isMimeType", "isMongoId", "isMultibyte", "isNumeric", "isPort", "isSurrogatePair", "isURL", "isUUID", "isUppercase", "isVariableWidth"]` |
+| name      | string |              | The name attribute is used to reference input elements and to reference it's data.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| type      | string | text         | The type attribute specifies the type of  element to display. **Supported types:** `[email, password, text, color, date, datetime-local, month, number, range, hidden, search, tel, url, week]` <br/> **Not supported types:** `[button, checkbox, file, image, radio, reset, submit, time]`                                                                                                                                                                                                                                                                                                     |
+| className | string | form-control | Base CSS class for the component. Generally one should only change className to provide new, non-Bootstrap, CSS styles for a component.                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 ### Usage/Demo
 ```js
 import React, { Component } from 'react'
@@ -69,7 +73,7 @@ export default class App extends Component {
     return (
       <div>
         <Input validator="isEmail" name="userEmail" onChange={this.handleChange} />
-        <Input validator="isCreditCard" name="userCreditCard" onChange={this.handleChange} />
+        <Input validator="isCreditCard" name="userCreditCard" onChange={this.handleChange} type="number" />
       </div>
     )
   }

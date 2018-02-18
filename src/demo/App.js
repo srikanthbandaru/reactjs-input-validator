@@ -27,7 +27,7 @@ export default class App extends Component {
     return (
       <div>
         <Input validator="isEmail" name="userEmail" onChange={this.handleChange} />
-        <Input validator="isCreditCard" name="userCreditCard" onChange={this.handleChange} />
+        <Input validator="isAlphanumeric" name="userPassword" onChange={this.handleChange} type="password"/>
       </div>
     )
   }

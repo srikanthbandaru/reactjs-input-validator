@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import validator from 'validator'
 import {errorMessages} from './errorMessages'
 import './Input.css'
+import {supportedTypes} from './constants'
 
 export default class Input extends Component {
   constructor(props) {
@@ -26,6 +27,13 @@ export default class Input extends Component {
     }
   }
 
+  isInputTypeSupported(type) {
+    if (type === undefined) { // if the type prop is not passed, returning ture to render type="text"
+      return true
+    }
+    return supportedTypes.includes(type)
+  }
+
   render() {
     const styles = this.state.validationResult === true
     ? 'valid-input'
@@ -33,23 +41,32 @@ export default class Input extends Component {
         ? 'invalid-input'
         : ''
     const inputClassName = `input-validator-form-control ${this.props.className} ${styles}`
+    const inputType = this.props.type ? this.props.type : 'text'
 
     return(
       <div>
-        <input
-          className={inputClassName}
-          type='text'
-          name={this.props.name}
-          value={this.state.inputValue}
-          onChange={this.handleInputChange}
-          onBlur={this.handleOnBlur}
-        />
-        {
-          this.state.validationResult === true
-          ? <div className="valid-input-feedback">Looks good!</div>
-          : this.state.validationResult === false
-            ? <div className="invalid-input-feedback">{errorMessages[this.props.validator]}</div>
-            : null
+        {this.isInputTypeSupported(this.props.type)
+          ?
+            <div>
+              <input
+                className={inputClassName}
+                type={inputType}
+                name={this.props.name}
+                value={this.state.inputValue}
+                onChange={this.handleInputChange}
+                onBlur={this.handleOnBlur}
+              />
+              {this.state.validationResult === true
+                ? <div className="valid-input-feedback">Looks good!</div>
+                : this.state.validationResult === false
+                  ? <div className="invalid-input-feedback">
+                      {errorMessages[this.props.validator]}
+                    </div>
+                  : null
+              }
+            </div>
+          :
+            null
         }
       </div>
     )
