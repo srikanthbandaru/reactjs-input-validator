@@ -47,10 +47,12 @@ export default class Input extends Component {
       <div>
         {this.isInputTypeSupported(this.props.type)
           ?
-            <div>
+            <div className="input-form-group">
+              {this.props.label ? <label className="input-label">{this.props.label}</label> : null}
               <input
                 className={inputClassName}
                 type={inputType}
+                placeholder={this.props.placeholder}
                 name={this.props.name}
                 value={this.state.inputValue}
                 onChange={this.handleInputChange}
