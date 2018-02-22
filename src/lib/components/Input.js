@@ -1,8 +1,11 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import validator from 'validator'
+import FormGroup from 'react-bootstrap/lib/FormGroup'
+import ControlLabel from 'react-bootstrap/lib/ControlLabel'
+import FormControl from 'react-bootstrap/lib/FormControl'
+import HelpBlock from 'react-bootstrap/lib/HelpBlock'
 import {errorMessages} from './errorMessages'
-import './Input.css'
 import {supportedTypes} from './constants'
 
 export default class Input extends Component {
@@ -35,22 +38,22 @@ export default class Input extends Component {
   }
 
   render() {
-    const styles = this.state.validationResult === true
-    ? 'valid-input'
+    const validationState = this.state.validationResult === true
+    ? 'success'
     :  this.state.validationResult === false
-        ? 'invalid-input'
-        : ''
-    const inputClassName = `input-validator-form-control ${this.props.className} ${styles}`
+        ? 'error'
+        : null
+
     const inputType = this.props.type ? this.props.type : 'text'
 
     return(
       <div>
         {this.isInputTypeSupported(this.props.type)
           ?
-            <div className="input-form-group">
-              {this.props.label ? <label className="input-label">{this.props.label}</label> : null}
+            <FormGroup controlId={this.props.name} validationState={validationState}>
+              {this.props.label ? <ControlLabel>{this.props.label}</ControlLabel> : null}
               <input
-                className={inputClassName}
+                className="form-control"
                 type={inputType}
                 placeholder={this.props.placeholder}
                 name={this.props.name}
@@ -58,15 +61,14 @@ export default class Input extends Component {
                 onChange={this.handleInputChange}
                 onBlur={this.handleOnBlur}
               />
-              {this.state.validationResult === true
-                ? <div className="valid-input-feedback">Looks good!</div>
-                : this.state.validationResult === false
-                  ? <div className="invalid-input-feedback">
-                      {errorMessages[this.props.validator]}
-                    </div>
-                  : null
+              <FormControl.Feedback />
+              {this.state.validationResult === false
+                ? <HelpBlock>
+                    {errorMessages[this.props.validator]}
+                  </HelpBlock>
+                : null
               }
-            </div>
+            </FormGroup>
           :
             null
         }

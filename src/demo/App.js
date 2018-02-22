@@ -25,10 +25,11 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
+      <form>
         <Input validator="isEmail" name="userEmail" placeholder="Enter email" label="Email address" onChange={this.handleChange} />
         <Input validator="isAlphanumeric" name="userPassword" onChange={this.handleChange} type="password"/>
-      </div>
+        <button type="submit" class="btn btn-primary">Sign in</button>
+      </form>
     )
   }
 }

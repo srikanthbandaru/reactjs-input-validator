@@ -1,6 +1,6 @@
 {
   "name": "reactjs-input-validator",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "main": "build/reactjs-input-validator.js",
   "author": "Srikanth Bandaru <srikanthb602@gmail.com>",
   "license": "MIT",
@@ -17,6 +17,7 @@
     "test": "node scripts/test.js --env=jsdom"
   },
   "dependencies": {
+    "react-bootstrap": "^0.32.1",
     "validator": "^9.4.0"
   },
   "devDependencies": {

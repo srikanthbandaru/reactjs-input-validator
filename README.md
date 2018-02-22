@@ -30,10 +30,10 @@ import {Input} from 'reactjs-inpupt-validator';
 var Input = require('reactjs-input-validator');
 ```
 ### Import CSS
-Finally, you need to import the CSS file into your application.
-```js
-// index.js
-import 'reactjs-input-validator/build/css/reactjs-input-validator.css'
+Finally, you need to link bootstrap to your application.
+```html
+// index.html
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 ```
 ### Props
 | Name      | Type   | Default      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
