@@ -14,20 +14,26 @@ export default class Input extends Component {
     this.state = {inputValue: '', validationResult: ''}
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleOnBlur = this.handleOnBlur.bind(this)
+    this.handleValidation = this.handleValidation.bind(this)
   }
 
   handleInputChange(event) {
     this.setState({
       inputValue: event.target.value
     })
-    if(this.props.onChange) this.props.onChange(event.target.value, event.target.name);
+
+    // If the user wants to have access to the form data
+    if(this.props.onChange) this.props.onChange(event.target.value, event.target.name, this.handleValidation(event.target.value));
   }
 
   handleOnBlur() {
     if(this.props.validator) {
-      const validationResult = validator[this.props.validator](this.state.inputValue)
-      this.setState({ validationResult: validationResult })
+      this.setState({ validationResult: this.handleValidation(this.state.inputValue) })
     }
+  }
+
+  handleValidation(inputValue) {
+    return validator[this.props.validator](inputValue)
   }
 
   isInputTypeSupported(type) {

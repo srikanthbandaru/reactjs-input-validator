@@ -51,30 +51,32 @@ export default class App extends Component {
   constructor (){
       super();
       this.state = {
-          formData : {}
+          data : {}
       };
-
       this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(value, name) {
-    const formData = this.state.formData;
-    formData[name] = value
+  handleChange(value, name, validationState) {
+    const data = this.state.data;
+    data[name] = {value: value, validation: validationState}
 
     this.setState({
-      formData: formData
+      data: data
     })
 
-    // You can now find your form data by doing
-    console.log(this.state.formData);
+    // if you want access to your form data
+    let formData = formInputData(this.state.data);
+    // tells you if the entire form validation is true or false
+    let isFormValid = formValidation(this.state.data)
   }
 
   render() {
     return (
-      <div>
-        <Input validator="isEmail" name="userEmail" onChange={this.handleChange} />
-        <Input validator="isCreditCard" name="userCreditCard" onChange={this.handleChange} type="number" />
-      </div>
+      <form>
+        <Input validator="isEmail" name="userEmail" placeholder="Enter email" label="Email address" onChange={this.handleChange} />
+        <Input validator="isAlphanumeric" name="userPassword" onChange={this.handleChange} type="password"/>
+        <button type="submit" class="btn btn-primary" disabled={!formValidation(this.state.data)}>Sign in</button>
+      </form>
     )
   }
 }
