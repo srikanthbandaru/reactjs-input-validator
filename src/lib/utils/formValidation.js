@@ -8,7 +8,7 @@ export const formValidation = (data) => {
 
   var isFormValid = Object.values(formValidation)
 
-  if(isFormValid.includes(false)) {
+  if(isFormValid.includes(false) || isFormValid.includes(undefined)) {
      return false
   } else if (isFormValid.length === 0){
     return null

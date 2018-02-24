@@ -45,13 +45,16 @@ Finally, you need to link bootstrap to your application.
 ### Usage/Demo
 ```js
 import React, { Component } from 'react'
-import { Input } from 'reactjs-input-validator';
+import { Input, formInputData, formValidation } from 'reactjs-input-validator';
 
 export default class App extends Component {
   constructor (){
       super();
       this.state = {
-          data : {}
+          data : {
+            userPassword: {},
+            userEmail: {}
+          }
       };
       this.handleChange = this.handleChange.bind(this);
   }
@@ -75,7 +78,7 @@ export default class App extends Component {
       <form>
         <Input validator="isEmail" name="userEmail" placeholder="Enter email" label="Email address" onChange={this.handleChange} />
         <Input validator="isAlphanumeric" name="userPassword" onChange={this.handleChange} type="password"/>
-        <button type="submit" class="btn btn-primary" disabled={!formValidation(this.state.data)}>Sign in</button>
+        <button type="submit" className="btn btn-primary" disabled={!formValidation(this.state.data)}>Sign in</button>
       </form>
     )
   }
