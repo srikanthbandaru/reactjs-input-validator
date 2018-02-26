@@ -6,7 +6,7 @@ export default function validation(str, props) {
   const optionalParams = validatorDefinition[props.validator].optionalParams
 
   let mandatoryArgs =  mandatoryParams.map(param => {
-    return param === 'str' ? `${str}` : `${props[param]}`
+    return param === 'str' ? str : props[param]
   })
 
   let optionalArgs = optionalParams.length > 0 ? optionalParams.map(param => {
