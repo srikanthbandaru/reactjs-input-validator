@@ -5,17 +5,14 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      data: {
-        userPassword: {},
-        userEmail: {},
-      },
+      data: {},
     };
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(value, name, validationState) {
+  handleChange(value, name, validationState, isRequired) {
     const { data } = this.state;
-    data[name] = { value, validation: validationState };
+    data[name] = { value, validation: validationState, isRequired };
     this.setState({
       data,
     });
@@ -37,6 +34,7 @@ export default class App extends Component {
           placeholder="Enter email"
           label="Email address"
           onChange={this.handleChange}
+          required
         />
         <Input
           validator="isAlphanumeric"
