@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
@@ -11,9 +10,6 @@ import validation from '../utils/validation';
 
 export default class Input extends Component {
   static isInputTypeSupported(type) {
-    if (type === undefined) {
-      return true; // if the type prop is not passed, returning true to render type="text"
-    }
     return supportedInputTypes.includes(type);
   }
 
@@ -51,9 +47,10 @@ export default class Input extends Component {
   }
 
   render() {
-    const validationState = this.state.validationResult === true
+    const validationState =
+    (this.state.validationResult === true) // eslint-disable-line no-nested-ternary
       ? 'success'
-      : this.state.validationResult === false
+      : (this.state.validationResult === false)
         ? 'error'
         : null;
 
@@ -98,4 +95,11 @@ Input.propTypes = {
   type: PropTypes.string,
   label: PropTypes.string,
   onChange: PropTypes.func,
+};
+
+Input.defaultProps = {
+  placeholder: '',
+  type: 'text',
+  label: null,
+  onChange: () => {},
 };
