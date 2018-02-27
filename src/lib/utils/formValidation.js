@@ -1,18 +1,18 @@
-export const formValidation = (data) => {
-  var formValidation = {};
-  Object.keys(data).map(item => {
-    formValidation[item] = data[item].validation
+export default function formValidation(data) {
+  const validationStatus = {};
+  Object.keys(data).map((item) => {
+    validationStatus[item] = data[item].validation;
 
-    return formValidation;
-  })
+    return validationStatus;
+  });
 
-  var isFormValid = Object.values(formValidation)
+  const isFormValid = Object.values(validationStatus);
 
-  if(isFormValid.includes(false) || isFormValid.includes(undefined)) {
-     return false
-  } else if (isFormValid.length === 0){
-    return null
+  if (isFormValid.includes(false) || isFormValid.includes(undefined)) {
+    return false;
+  } else if (isFormValid.length === 0) {
+    return null;
   }
 
-  return true
+  return true;
 }

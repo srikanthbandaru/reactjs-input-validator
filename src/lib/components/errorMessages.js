@@ -1,4 +1,4 @@
-export const errorMessages = {
+const errorMessages = {
   isAlpha: 'Please enter only letters',
   isAlphanumeric: 'Please enter only letters and numbers',
   isAscii: 'Please enter ASCII characters only',
@@ -36,5 +36,7 @@ export const errorMessages = {
   isURL: 'Please enter a valid URL',
   isUUID: 'Please enter a valid UUID',
   isUppercase: 'Please enter only UPPERCASE characters',
-  isVariableWidth: 'Please enter a mixture of full and half-width characters'
-}
+  isVariableWidth: 'Please enter a mixture of full and half-width characters',
+};
+
+export { errorMessages as default };

@@ -1,6 +1,7 @@
 {
-  "extends": "react-app",
+  "extends": "airbnb",
    "rules": {
-     "complexity": ["error", 10]
+     "complexity": ["error", 10],
+     "react/jsx-filename-extension": 0
    }
 }
