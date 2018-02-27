@@ -1,6 +1,6 @@
 {
   "name": "reactjs-input-validator",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "main": "build/reactjs-input-validator.js",
   "author": "Srikanth Bandaru <srikanthb602@gmail.com>",
   "license": "MIT",
@@ -17,6 +17,7 @@
     "test": "node scripts/test.js --env=jsdom"
   },
   "dependencies": {
+    "prop-types": "^15.6.0",
     "react-bootstrap": "^0.32.1",
     "validator": "^9.4.0"
   },
@@ -36,6 +37,7 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "4.10.0",
+    "eslint-config-airbnb": "^16.1.0",
     "eslint-config-react-app": "^2.0.1",
     "eslint-loader": "1.9.0",
     "eslint-plugin-flowtype": "2.39.1",
@@ -51,7 +53,6 @@
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
     "promise": "8.0.1",
-    "prop-types": "^15.6.0",
     "raf": "3.4.0",
     "react": "^16.2.0",
     "react-dev-utils": "^4.2.1",
@@ -106,8 +107,5 @@
     "presets": [
       "react-app"
     ]
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   }
 }

@@ -1,9 +1,9 @@
-export function formInputData(data) {
-  var formInputData = {};
-  Object.keys(data).map(item => {
-    formInputData[item] = data[item].value
+export default function formInputData(data) {
+  const inputData = {};
+  Object.keys(data).map((item) => {
+    inputData[item] = data[item].value;
 
-    return formInputData;
-  })
-  return formInputData
+    return inputData;
+  });
+  return formInputData;
 }

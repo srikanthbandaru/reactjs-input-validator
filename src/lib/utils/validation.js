@@ -1,17 +1,10 @@
-import validator from 'validator'
-import {validatorDefinition} from '../components/constants'
+import validator from 'validator';
+import { validatorDefinition } from '../components/constants';
 
 export default function validation(str, props) {
-  const mandatoryParams = validatorDefinition[props.validator].mandatoryParams
-  const optionalParams = validatorDefinition[props.validator].optionalParams
+  const { mandatoryParams, optionalParams } = validatorDefinition[props.validator];
+  const mandatoryArgs = mandatoryParams.map(param => (param === 'str' ? str : props[param]));
+  const optionalArgs = optionalParams.length > 0 ? optionalParams.map(param => props[param]) : null;
 
-  let mandatoryArgs =  mandatoryParams.map(param => {
-    return param === 'str' ? str : props[param]
-  })
-
-  let optionalArgs = optionalParams.length > 0 ? optionalParams.map(param => {
-    return props[param]
-  }) : null
-
-  return validator[props.validator](...mandatoryArgs, ...optionalArgs)
+  return validator[props.validator](...mandatoryArgs, ...optionalArgs);
 }
