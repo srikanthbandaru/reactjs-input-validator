@@ -19,26 +19,45 @@ export default class Input extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleOnBlur = this.handleOnBlur.bind(this);
     this.handleValidation = this.handleValidation.bind(this);
+    this.sendInputData = this.sendInputData.bind(this);
+  }
+
+  componentDidMount() {
+    this.sendInputData();
   }
 
   handleInputChange(event) {
     this.setState({
       inputValue: event.target.value,
     });
+    this.sendInputData(event);
 
-    // If the user wants to have access to the form data and form validation as they type
+    // reset the validation result to null IF (input field is empty) AND (input is not required)
+    if (event.target.value === '' && !this.props.required) {
+      this.setState({ validationResult: null });
+    }
+  }
+
+  sendInputData(event) {
+    // If the user wants to have access to the input data and input validation
+    const value = (event === undefined && this.state.value === undefined) ? '' : event.target.value;
     if (this.props.onChange) {
       this.props.onChange(
-        event.target.value, event.target.name,
-        this.handleValidation(event.target.value),
+        value, this.props.name,
+        this.handleValidation(value),
+        this.props.required,
       );
     }
   }
 
   handleOnBlur() {
-    // checking validation result on blur even to display error or success styles
-    if (this.props.validator) {
-      this.setState({ validationResult: this.handleValidation(this.state.inputValue) });
+    // checking validation result on blur even to display the error/success styles
+    const { inputValue } = this.state;
+    const { required } = this.props;
+
+    // set the validation result only IF (input is empty) AND (input not required) FAILS
+    if (!(inputValue === '' && !required)) {
+      this.setState({ validationResult: this.handleValidation(inputValue) });
     }
   }
 
@@ -95,6 +114,7 @@ Input.propTypes = {
   type: PropTypes.string,
   label: PropTypes.string,
   onChange: PropTypes.func,
+  required: PropTypes.bool,
 };
 
 Input.defaultProps = {
@@ -102,4 +122,5 @@ Input.defaultProps = {
   type: 'text',
   label: null,
   onChange: () => {},
+  required: false,
 };

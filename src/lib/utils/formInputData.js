@@ -5,5 +5,5 @@ export default function formInputData(data) {
 
     return inputData;
   });
-  return formInputData;
+  return inputData;
 }

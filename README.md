@@ -42,45 +42,62 @@ Finally, you need to link bootstrap to your application.
 | name      | string |              | The name attribute is used to reference input elements and to reference it's data.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | type      | string | text         | The type attribute specifies the type of  element to display. <br/> **Supported types:** `[email, password, text, color, date, datetime-local, month, number, range, hidden, search, tel, url, week]` <br/> **Not supported types:** `[button, checkbox, file, image, radio, reset, submit, time]`                                                                                                                                                                                                                                                                                                     |
 | className | string | form-control | Base CSS class for the component. Generally one should only change className to provide new, non-Bootstrap, CSS styles for a component.                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| required | boolean | false | Use this prop to make the inpupt field required.                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 ### Usage/Demo
 ```js
 import React, { Component } from 'react'
 import { Input, formInputData, formValidation } from 'reactjs-input-validator';
 
 export default class App extends Component {
-  constructor (){
-      super();
-      this.state = {
-          data : {
-            userPassword: {},
-            userEmail: {}
-          }
-      };
-      this.handleChange = this.handleChange.bind(this);
+  constructor() {
+    super();
+    this.state = {
+      data: {},
+    };
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(value, name, validationState) {
-    const data = this.state.data;
-    data[name] = {value: value, validation: validationState}
-
+  handleChange(value, name, validationState, isRequired) {
+    const { data } = this.state;
+    data[name] = { value, validation: validationState, isRequired };
     this.setState({
-      data: data
-    })
+      data,
+    });
 
     // if you want access to your form data
-    let formData = formInputData(this.state.data);
+    const formData = formInputData(this.state.data); // eslint-disable-line no-unused-vars
     // tells you if the entire form validation is true or false
-    let isFormValid = formValidation(this.state.data)
+    const isFormValid = formValidation(this.state.data); // eslint-disable-line no-unused-vars
   }
 
   render() {
+    const emailOptions = { require_display_name: true };
     return (
       <form>
-        <Input validator="isEmail" name="userEmail" placeholder="Enter email" label="Email address" onChange={this.handleChange} />
-        <Input validator="isAlphanumeric" name="userPassword" onChange={this.handleChange} type="password"/>
-        <button type="submit" className="btn btn-primary" disabled={!formValidation(this.state.data)}>Sign in</button>
+        <Input
+          validator="isEmail"
+          options={emailOptions}
+          name="userEmail"
+          placeholder="Enter email"
+          label="Email address"
+          onChange={this.handleChange}
+          required
+        />
+        <Input
+          validator="isAlphanumeric"
+          name="userPassword"
+          onChange={this.handleChange}
+          type="password"
+        />
+        <button
+          type="submit"
+          className="btn btn-primary"
+          disabled={!formValidation(this.state.data)}
+        >
+          Sign in
+        </button>
       </form>
-    )
+    );
   }
 }
 
