@@ -20,6 +20,7 @@ export default class Input extends Component {
     this.handleOnBlur = this.handleOnBlur.bind(this);
     this.handleValidation = this.handleValidation.bind(this);
     this.sendInputData = this.sendInputData.bind(this);
+    this.handleOnFocus = this.handleOnFocus.bind(this);
   }
 
   componentDidMount() {
@@ -48,6 +49,10 @@ export default class Input extends Component {
         this.props.required,
       );
     }
+  }
+
+  handleOnFocus() {
+    this.setState({ validationResult: null });
   }
 
   handleOnBlur() {
@@ -89,6 +94,7 @@ export default class Input extends Component {
                 value={this.state.inputValue}
                 onChange={this.handleInputChange}
                 onBlur={this.handleOnBlur}
+                onFocus={this.handleOnFocus}
               />
               <FormControl.Feedback />
               {this.state.validationResult === false
