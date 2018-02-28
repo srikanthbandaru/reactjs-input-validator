@@ -5,7 +5,7 @@ import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import { supportedInputTypes } from './constants';
 import validation from '../utils/validation';
-import ErrorMessagess from './ErrorMessagess';
+import ErrorMessage from './ErrorMessage';
 
 export default class Input extends Component {
   static isInputTypeSupported(type) {
@@ -98,7 +98,7 @@ export default class Input extends Component {
                 onFocus={this.handleOnFocus}
               />
               <FormControl.Feedback />
-              <ErrorMessagess
+              <ErrorMessage
                 validator={this.props.validator}
                 validationResult={validationResult}
                 inputValue={inputValue}

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 import { errorMessages } from './constants';
 
-export default function ErrorMessagess(props) {
+export default function ErrorMessage(props) {
   return (
     <div>
       {props.validationResult === false
@@ -18,12 +18,12 @@ export default function ErrorMessagess(props) {
   );
 }
 
-ErrorMessagess.propTypes = {
+ErrorMessage.propTypes = {
   validationResult: PropTypes.bool,
   inputValue: PropTypes.string.isRequired,
   validator: PropTypes.string.isRequired,
 };
 
-ErrorMessagess.defaultProps = {
+ErrorMessage.defaultProps = {
   validationResult: null,
 };
