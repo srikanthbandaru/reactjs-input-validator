@@ -40,11 +40,11 @@ export default class Input extends Component {
 
   sendInputData(event) {
     // If the user wants to have access to the input data and input validation
-    const value = (event === undefined && this.state.value === undefined) ? '' : event.target.value;
+    const inputValue = event ? event.target.value : this.state.inputValue;
     if (this.props.onChange) {
       this.props.onChange(
-        value, this.props.name,
-        this.handleValidation(value),
+        inputValue, this.props.name,
+        this.handleValidation(inputValue),
         this.props.required,
       );
     }
