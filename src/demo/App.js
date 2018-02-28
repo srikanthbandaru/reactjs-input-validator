@@ -34,6 +34,7 @@ export default class App extends Component {
           placeholder="Enter email"
           label="Email address"
           onChange={this.handleChange}
+          className="myCustomCSSClass"
           required
         />
         <Input

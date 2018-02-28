@@ -79,6 +79,7 @@ export default class Input extends Component {
         : null;
 
     const inputType = this.props.type ? this.props.type : 'text';
+    const inputClassName = `form-control ${this.props.className}`;
 
     return (
       <div>
@@ -87,7 +88,7 @@ export default class Input extends Component {
             <FormGroup controlId={this.props.name} validationState={validationState}>
               {this.props.label ? <ControlLabel>{this.props.label}</ControlLabel> : null}
               <input
-                className="form-control"
+                className={inputClassName}
                 type={inputType}
                 placeholder={this.props.placeholder}
                 name={this.props.name}
@@ -121,6 +122,7 @@ Input.propTypes = {
   label: PropTypes.string,
   onChange: PropTypes.func,
   required: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 Input.defaultProps = {
@@ -129,4 +131,5 @@ Input.defaultProps = {
   label: null,
   onChange: () => {},
   required: false,
+  className: '',
 };
