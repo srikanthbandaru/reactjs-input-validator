@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
-import HelpBlock from 'react-bootstrap/lib/HelpBlock';
-import errorMessages from './errorMessages';
 import { supportedInputTypes } from './constants';
 import validation from '../utils/validation';
+import ErrorMessagess from './ErrorMessagess';
 
 export default class Input extends Component {
   static isInputTypeSupported(type) {
@@ -15,7 +14,7 @@ export default class Input extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { inputValue: '', validationResult: '' };
+    this.state = { inputValue: '', validationResult: null };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleOnBlur = this.handleOnBlur.bind(this);
     this.handleValidation = this.handleValidation.bind(this);
@@ -71,12 +70,13 @@ export default class Input extends Component {
   }
 
   render() {
+    const { inputValue, validationResult } = this.state;
     const validationState =
-    (this.state.validationResult === true) // eslint-disable-line no-nested-ternary
-      ? 'success'
-      : (this.state.validationResult === false)
-        ? 'error'
-        : null;
+      validationResult // eslint-disable-line no-nested-ternary
+        ? 'success'
+        : validationResult === false
+          ? 'error'
+          : null;
 
     const inputType = this.props.type ? this.props.type : 'text';
     const inputClassName = `form-control ${this.props.className}`;
@@ -92,19 +92,17 @@ export default class Input extends Component {
                 type={inputType}
                 placeholder={this.props.placeholder}
                 name={this.props.name}
-                value={this.state.inputValue}
+                value={inputValue}
                 onChange={this.handleInputChange}
                 onBlur={this.handleOnBlur}
                 onFocus={this.handleOnFocus}
               />
               <FormControl.Feedback />
-              {this.state.validationResult === false
-                ?
-                  <HelpBlock>
-                    {errorMessages[this.props.validator]}
-                  </HelpBlock>
-                : null
-              }
+              <ErrorMessagess
+                validator={this.props.validator}
+                validationResult={validationResult}
+                inputValue={inputValue}
+              />
             </FormGroup>
           :
             null
