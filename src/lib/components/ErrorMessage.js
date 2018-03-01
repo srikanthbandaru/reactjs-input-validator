@@ -4,7 +4,7 @@ import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 import { errorMessages } from './constants';
 
 const requiredErrorMessages = props => (
-  <HelpBlock>{props.requiredErrMsg ? props.requiredErrMsg : errorMessages.isEmpty}</HelpBlock>
+  <HelpBlock>{props.requiredErrMsg ? props.requiredErrMsg : "You can't leave this blank"}</HelpBlock>
 );
 
 const validatorErrorMessages = props => <HelpBlock>{errorMessages[props.validator]}</HelpBlock>;

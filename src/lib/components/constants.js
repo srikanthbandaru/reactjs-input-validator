@@ -14,7 +14,7 @@ export const errorMessages = {
   isDataURI: 'Please enter a valid data uri format',
   isDecimal: 'Please enter a valid decimal number',
   isEmail: 'Please enter a valid email address',
-  isEmpty: "You can't leave this blank",
+  isEmpty: 'please leave this empty',
   isFQDN: 'Please enter a valid fully qualified domain name',
   isFloat: 'Please enter a valid float value',
   isFullWidth: 'Please enter atleast one full-width character',
