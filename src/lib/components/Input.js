@@ -59,7 +59,7 @@ export default class Input extends Component {
     const { inputValue } = this.state;
     const { required } = this.props;
 
-    // set the validation result only IF (input is empty) AND (input not required) FAILS
+    // do the validation only IF (input is empty) AND (input not required) FAILS
     if (!(inputValue === '' && !required)) {
       this.setState({ validationResult: this.handleValidation(inputValue) });
     }
