@@ -98,11 +98,16 @@ export default class Input extends Component {
                 onFocus={this.handleOnFocus}
               />
               <FormControl.Feedback />
-              <ErrorMessage
-                validator={this.props.validator}
-                validationResult={validationResult}
-                inputValue={inputValue}
-              />
+              {validationResult === false
+                ?
+                  <ErrorMessage
+                    validator={this.props.validator}
+                    inputValue={inputValue}
+                    requiredErrMsg={this.props.requiredErrMsg}
+                  />
+                :
+                  null
+              }
             </FormGroup>
           :
             null
@@ -121,6 +126,7 @@ Input.propTypes = {
   onChange: PropTypes.func,
   required: PropTypes.bool,
   className: PropTypes.string,
+  requiredErrMsg: PropTypes.string,
 };
 
 Input.defaultProps = {
@@ -130,4 +136,5 @@ Input.defaultProps = {
   onChange: () => {},
   required: false,
   className: '',
+  requiredErrMsg: null,
 };

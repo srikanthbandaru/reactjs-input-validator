@@ -1,29 +1,33 @@
-/* eslint-disable no-nested-ternary */
 import React from 'react';
 import PropTypes from 'prop-types';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 import { errorMessages } from './constants';
 
-export default function ErrorMessage(props) {
-  return (
-    <div>
-      {props.validationResult === false
-      ?
-        props.inputValue === ''
-          ? <HelpBlock>{errorMessages.isEmpty}</HelpBlock>
-          : <HelpBlock>{errorMessages[props.validator]}</HelpBlock>
-      : null
-      }
-    </div>
-  );
-}
+const requiredErrorMessages = props => (
+  <HelpBlock>{props.requiredErrMsg ? props.requiredErrMsg : errorMessages.isEmpty}</HelpBlock>
+);
 
-ErrorMessage.propTypes = {
-  validationResult: PropTypes.bool,
-  inputValue: PropTypes.string.isRequired,
+const validatorErrorMessages = props => <HelpBlock>{errorMessages[props.validator]}</HelpBlock>;
+
+const ErrorMessage = props => (
+  <div>
+    {props.inputValue === ''
+      ? requiredErrorMessages(props)
+      : validatorErrorMessages(props)
+    }
+  </div>
+);
+
+requiredErrorMessages.propTypes = {
+  requiredErrMsg: PropTypes.string.isRequired,
+};
+
+validatorErrorMessages.propTypes = {
   validator: PropTypes.string.isRequired,
 };
 
-ErrorMessage.defaultProps = {
-  validationResult: null,
+ErrorMessage.propTypes = {
+  inputValue: PropTypes.string.isRequired,
 };
+
+export default ErrorMessage;

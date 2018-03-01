@@ -36,6 +36,7 @@ export default class App extends Component {
           onChange={this.handleChange}
           className="myCustomCSSClass"
           required
+          requiredErrMsg="This is my custom error message that overrides default error message"
         />
         <Input
           validator="isAlphanumeric"
