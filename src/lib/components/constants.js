@@ -44,6 +44,17 @@ export const errorMessages = {
   isVariableWidth: 'Please enter a mixture of full and half-width characters',
 };
 
+export const validatorTestArgs = {
+  contains: {
+    valid: { mandatoryArgs: { str: 'Random String', seed: 'ri' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: 'string', seed: 'testSeed' }, optionalArgs: {} },
+  },
+  isEmail: {
+    valid: { mandatoryArgs: { str: 'sri@gmail.com' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: 'string@gmailm' }, optionalArgs: {} },
+  },
+};
+
 export const validatorDefinition = {
   contains: { mandatoryParams: ['str', 'seed'], optionalParams: [] },
   equals: { mandatoryParams: ['str', 'comparison'], optionalParams: [] },

@@ -82,7 +82,7 @@ export default class Input extends Component {
     const inputClassName = `form-control ${this.props.className}`;
 
     return (
-      <div>
+      <div id="reactjs-input-validator">
         {this.constructor.isInputTypeSupported(this.props.type)
           ?
             <FormGroup controlId={this.props.name} validationState={validationState}>
