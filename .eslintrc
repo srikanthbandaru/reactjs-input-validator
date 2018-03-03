@@ -3,5 +3,8 @@
    "rules": {
      "complexity": ["error", 10],
      "react/jsx-filename-extension": 0
+   },
+   "env": {
+    "jest": true
    }
 }

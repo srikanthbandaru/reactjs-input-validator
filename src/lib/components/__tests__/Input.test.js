@@ -1,12 +1,12 @@
-/* eslint-disable */
 import React from 'react';
-import { shallow, mount, configure } from 'enzyme';
+import { mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Chance from 'chance';
 import Input from '../Input';
-import { validatorDefinition, validatorTestArgs } from '../constants';
+import { validatorTestArgs } from '../constants';
 
 configure({ adapter: new Adapter() });
+const chance = new Chance();
 
 Object.keys(validatorTestArgs).map((validator) => {
   describe('reactjs-input-validator', () => {
@@ -20,11 +20,12 @@ Object.keys(validatorTestArgs).map((validator) => {
 
     describe(`should validate if user input --${validator}--`, () => {
       test('for valid input', () => {
-        const mandatoryArgs = validatorTestArgs[validator].valid.mandatoryArgs;
+        const { mandatoryArgs } = validatorTestArgs[validator].valid;
         Object.keys(mandatoryArgs).map((mandatoryArg) => {
           if (mandatoryArg !== 'str') {
             wrapper.setProps({ [mandatoryArg]: mandatoryArgs[mandatoryArg] });
           }
+          return null;
         });
 
         input.simulate('change', { target: { value: mandatoryArgs.str } });
@@ -36,11 +37,12 @@ Object.keys(validatorTestArgs).map((validator) => {
       });
 
       test('for inValid input', () => {
-        const mandatoryArgs = validatorTestArgs[validator].inValid.mandatoryArgs;
+        const { mandatoryArgs } = validatorTestArgs[validator].inValid;
         Object.keys(mandatoryArgs).map((mandatoryArg) => {
           if (mandatoryArg !== 'str') {
             wrapper.setProps({ [mandatoryArg]: mandatoryArgs[mandatoryArg] });
           }
+          return null;
         });
 
         input.simulate('change', { target: { value: mandatoryArgs.str } });
@@ -84,4 +86,5 @@ Object.keys(validatorTestArgs).map((validator) => {
       expect(wrapper.find('Glyphicon').exists()).toBeFalsy();
     });
   });
+  return null;
 });

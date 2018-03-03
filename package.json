@@ -1,6 +1,6 @@
 {
   "name": "reactjs-input-validator",
-  "version": "0.13.5",
+  "version": "0.13.6",
   "main": "build/reactjs-input-validator.js",
   "author": "Srikanth Bandaru <srikanthb602@gmail.com>",
   "license": "MIT",
@@ -72,7 +72,7 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/**/*.{js,jsx,mjs}"
+      "src/lib/**/*.{js,jsx,mjs}"
     ],
     "setupFiles": [
       "<rootDir>/config/polyfills.js"
