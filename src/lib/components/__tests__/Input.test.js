@@ -9,7 +9,7 @@ configure({ adapter: new Adapter() });
 const chance = new Chance();
 
 Object.keys(validatorTestArgs).map((validator) => {
-  describe('reactjs-input-validator', () => {
+  describe(`reactjs-input-validator for validator --${validator}--`, () => {
     const wrapper = mount(<Input validator={validator} name={validator} />);
     const input = wrapper.find('input.form-control');
 
@@ -18,7 +18,7 @@ Object.keys(validatorTestArgs).map((validator) => {
       wrapper.setState({ inputValue: '' });
     });
 
-    describe(`should validate if user input --${validator}--`, () => {
+    describe('should validate the user input', () => {
       test('for valid input', () => {
         const { mandatoryArgs } = validatorTestArgs[validator].valid;
         Object.keys(mandatoryArgs).map((mandatoryArg) => {
@@ -31,9 +31,9 @@ Object.keys(validatorTestArgs).map((validator) => {
         input.simulate('change', { target: { value: mandatoryArgs.str } });
         expect(wrapper.state('inputValue')).toEqual(mandatoryArgs.str);
         input.simulate('blur');
-        expect(wrapper.find('ErrorMessage').exists()).toBeFalsy();
         expect(wrapper.find('Glyphicon').exists()).toBeTruthy();
         expect(wrapper.find('Glyphicon').prop('glyph')).toEqual('ok');
+        expect(wrapper.find('ErrorMessage').exists()).toBeFalsy();
       });
 
       test('for inValid input', () => {
@@ -48,9 +48,9 @@ Object.keys(validatorTestArgs).map((validator) => {
         input.simulate('change', { target: { value: mandatoryArgs.str } });
         expect(wrapper.state('inputValue')).toEqual(mandatoryArgs.str);
         input.simulate('blur');
-        expect(wrapper.find('ErrorMessage').exists()).toBeTruthy();
         expect(wrapper.find('Glyphicon').exists()).toBeTruthy();
         expect(wrapper.find('Glyphicon').prop('glyph')).toEqual('remove');
+        expect(wrapper.find('ErrorMessage').exists()).toBeTruthy();
       });
     });
 
@@ -64,6 +64,7 @@ Object.keys(validatorTestArgs).map((validator) => {
       });
 
       test("custom 'required' error message when 'requiredErrMsg' prop is passed", () => {
+        wrapper.setProps({ required: true });
         const requiredErrMsg = chance.sentence();
         wrapper.setProps({ requiredErrMsg });
         input.simulate('blur');

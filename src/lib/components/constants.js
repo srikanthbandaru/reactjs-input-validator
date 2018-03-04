@@ -44,17 +44,6 @@ export const errorMessages = {
   isVariableWidth: 'Please enter a mixture of full and half-width characters',
 };
 
-export const validatorTestArgs = {
-  contains: {
-    valid: { mandatoryArgs: { str: 'Random String', seed: 'ri' }, optionalArgs: {} },
-    inValid: { mandatoryArgs: { str: 'string', seed: 'testSeed' }, optionalArgs: {} },
-  },
-  isEmail: {
-    valid: { mandatoryArgs: { str: 'sri@gmail.com' }, optionalArgs: {} },
-    inValid: { mandatoryArgs: { str: 'string@gmailm' }, optionalArgs: {} },
-  },
-};
-
 export const validatorDefinition = {
   contains: { mandatoryParams: ['str', 'seed'], optionalParams: [] },
   equals: { mandatoryParams: ['str', 'comparison'], optionalParams: [] },
@@ -109,4 +98,219 @@ export const validatorDefinition = {
   isVariableWidth: { mandatoryParams: ['str'], optionalParams: [] },
   isWhitelisted: { mandatoryParams: ['str', 'chars'], optionalParams: [] },
   matches: { mandatoryParams: ['str', 'pattern'], optionalParams: ['modifiers'] },
+};
+
+export const validatorTestArgs = {
+  contains: {
+    valid: { mandatoryArgs: { str: 'foo bar', seed: 'foo' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: 'foo', seed: 'bar' }, optionalArgs: {} },
+  },
+  equals: {
+    valid: { mandatoryArgs: { str: 'abc', comparison: 'abc' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: 'abc', comparison: 'def' }, optionalArgs: {} },
+  },
+  isAfter: {
+    valid: { mandatoryArgs: { str: '03/03/2021' }, optionalArgs: { date: '' } },
+    inValid: { mandatoryArgs: { str: '03/02/2018' }, optionalArgs: { date: '' } },
+  },
+  isAlpha: {
+    valid: { mandatoryArgs: { str: 'foobar' }, optionalArgs: { locale: '' } },
+    inValid: { mandatoryArgs: { str: 'foo123' }, optionalArgs: { locale: '' } },
+  },
+  isAlphanumeric: {
+    valid: { mandatoryArgs: { str: 'foobar123' }, optionalArgs: { locale: '' } },
+    inValid: { mandatoryArgs: { str: 'foobar!@#' }, optionalArgs: { locale: '' } },
+  },
+  isAscii: {
+    valid: { mandatoryArgs: { str: 'foobar' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: 'ｆｏｏ' }, optionalArgs: {} },
+  },
+  isBase64: {
+    valid: { mandatoryArgs: { str: 'c3Jp' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: 'foo' }, optionalArgs: {} },
+  },
+  isBefore: {
+    valid: { mandatoryArgs: { str: '03/03/2017' }, optionalArgs: { date: '' } },
+    inValid: { mandatoryArgs: { str: '03/03/2025' }, optionalArgs: { date: '' } },
+  },
+  isBoolean: {
+    valid: { mandatoryArgs: { str: 'true' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: 'foo bar' }, optionalArgs: {} },
+  },
+  // isByteLength: {
+  //   valid: { mandatoryArgs: { str: '' }, optionalArgs: { options: '' } },
+  //   inValid: { mandatoryArgs: { str: '' }, optionalArgs: { options: '' } },
+  // },
+  isCreditCard: {
+    valid: { mandatoryArgs: { str: '4111111111111111' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: '3213' }, optionalArgs: {} },
+  },
+  isCurrency: {
+    valid: { mandatoryArgs: { str: '$99.99' }, optionalArgs: { options: '' } },
+    inValid: { mandatoryArgs: { str: '2.99$' }, optionalArgs: { options: '' } },
+  },
+  isDataURI: {
+    valid: { mandatoryArgs: { str: 'data:,foo bar!' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: 'https://www.google.com' }, optionalArgs: {} },
+  },
+  isDecimal: {
+    valid: { mandatoryArgs: { str: '99.90' }, optionalArgs: { options: '' } },
+    inValid: { mandatoryArgs: { str: '99,9' }, optionalArgs: { options: '' } },
+  },
+  isDivisibleBy: {
+    valid: { mandatoryArgs: { str: '4', number: '2' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: '5', number: '2' }, optionalArgs: {} },
+  },
+  isEmail: {
+    valid: { mandatoryArgs: { str: 'foo@bar.com' }, optionalArgs: { options: '' } },
+    inValid: { mandatoryArgs: { str: 'foo@bar' }, optionalArgs: { options: '' } },
+  },
+  // isEmpty: {
+  //   valid: { mandatoryArgs: { str: '' }, optionalArgs: {} },
+  //   inValid: { mandatoryArgs: { str: '' }, optionalArgs: {} },
+  // },
+  isFQDN: {
+    valid: { mandatoryArgs: { str: 'foobar.com' }, optionalArgs: { options: '' } },
+    inValid: { mandatoryArgs: { str: '127.0.0.0' }, optionalArgs: { options: '' } },
+  },
+  isFloat: {
+    valid: { mandatoryArgs: { str: '-0.2345' }, optionalArgs: { options: '' } },
+    inValid: { mandatoryArgs: { str: 'foobar' }, optionalArgs: { options: '' } },
+  },
+  isFullWidth: {
+    valid: { mandatoryArgs: { str: 'ｆｏｏ ｂａｒ' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: 'foo bar' }, optionalArgs: {} },
+  },
+  isHalfWidth: {
+    valid: { mandatoryArgs: { str: 'foobar123' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: 'ｆｏｏ' }, optionalArgs: {} },
+  },
+  isHash: {
+    valid: { mandatoryArgs: { str: '327b6f07435811239bc47e1544353273', algorithm: 'md5' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: 'foo bar', algorithm: 'md5' }, optionalArgs: {} },
+  },
+  isHexColor: {
+    valid: { mandatoryArgs: { str: '#bb9fd6' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: '#foobar' }, optionalArgs: {} },
+  },
+  isHexadecimal: {
+    valid: { mandatoryArgs: { str: 'ff0044' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: 'foo' }, optionalArgs: {} },
+  },
+  isIP: {
+    valid: { mandatoryArgs: { str: '127.0.0.1' }, optionalArgs: { version: '' } },
+    inValid: { mandatoryArgs: { str: 'www.google.com' }, optionalArgs: { version: '' } },
+  },
+  isISBN: {
+    valid: { mandatoryArgs: { str: '978-3-16-148410-0' }, optionalArgs: { version: '' } },
+    inValid: { mandatoryArgs: { str: '123456' }, optionalArgs: { version: '' } },
+  },
+  // isISIN: {
+  //   valid: { mandatoryArgs: { str: '6166' }, optionalArgs: {} },
+  //   inValid: { mandatoryArgs: { str: '12345' }, optionalArgs: {} },
+  // },
+  isISO31661Alpha2: {
+    valid: { mandatoryArgs: { str: 'US' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: 'zzz' }, optionalArgs: {} },
+  },
+  isISO8601: {
+    valid: { mandatoryArgs: { str: '2018-03-28' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: '2018-' }, optionalArgs: {} },
+  },
+  isISRC: {
+    valid: { mandatoryArgs: { str: 'USS1Z9900001' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: '999100' }, optionalArgs: {} },
+  },
+  isISSN: {
+    valid: { mandatoryArgs: { str: '20905076' }, optionalArgs: { options: '' } },
+    inValid: { mandatoryArgs: { str: '12345' }, optionalArgs: { options: '' } },
+  },
+  // isIn: {
+  //   valid: { mandatoryArgs: { str: 'foo', values: 'foobar' }, optionalArgs: {} },
+  //   inValid: { mandatoryArgs: { str: 'foo', values: 'bar' }, optionalArgs: {} },
+  // },
+  isInt: {
+    valid: { mandatoryArgs: { str: '1234' }, optionalArgs: { options: '' } },
+    inValid: { mandatoryArgs: { str: '123.123' }, optionalArgs: { options: '' } },
+  },
+  isJSON: {
+    valid: { mandatoryArgs: { str: '{"key": "value"}' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: '{key: "value"}' }, optionalArgs: {} },
+  },
+  isLatLong: {
+    valid: { mandatoryArgs: { str: '40.712775, -74.005973' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: '299, 399' }, optionalArgs: {} },
+  },
+  // isLength: {
+  //   valid: { mandatoryArgs: { str: 'abcd' }, optionalArgs: { options: '' } },
+  //   inValid: { mandatoryArgs: { str: '' }, optionalArgs: { options: '' } },
+  // },
+  // isLowercase: {
+  //   valid: { mandatoryArgs: { str: 'foobar' }, optionalArgs: {} },
+  //   inValid: { mandatoryArgs: { str: 'FOOBAR' }, optionalArgs: {} },
+  // },
+  isMACAddress: {
+    valid: { mandatoryArgs: { str: '4C:9F:0A:7B:30:25' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: '12345' }, optionalArgs: {} },
+  },
+  isMD5: {
+    valid: { mandatoryArgs: { str: '327b6f07435811239bc47e1544353273' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: 'foo bar' }, optionalArgs: {} },
+  },
+  isMimeType: {
+    valid: { mandatoryArgs: { str: 'text/css' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: 'text\\css' }, optionalArgs: {} },
+  },
+  // isMobilePhone: {
+  //   valid: { mandatoryArgs: { str: '', locale: 'en-US' }, optionalArgs: { options: '' } },
+  //   inValid: { mandatoryArgs: { str: '1234', locale: 'en-US' }, optionalArgs: { options: '' } },
+  // },
+  isMongoId: {
+    valid: { mandatoryArgs: { str: '507f1f77bcf86cd799439011' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: '507f1f77bcf86cd79fda9439011' }, optionalArgs: {} },
+  },
+  isMultibyte: {
+    valid: { mandatoryArgs: { str: 'foo＠bar.com' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: 'foobar' }, optionalArgs: {} },
+  },
+  isNumeric: {
+    valid: { mandatoryArgs: { str: '1234' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: 'a123e' }, optionalArgs: {} },
+  },
+  isPort: {
+    valid: { mandatoryArgs: { str: '8888' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: '262u2y1' }, optionalArgs: {} },
+  },
+  // isPostalCode: {
+  //   valid: { mandatoryArgs: { str: '90001', locale: 'US' }, optionalArgs: {} },
+  //   inValid: { mandatoryArgs: { str: '44sw33', locale: 'US' }, optionalArgs: {} },
+  // },
+  isSurrogatePair: {
+    valid: { mandatoryArgs: { str: '𠮷野𠮷' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: 'foo' }, optionalArgs: {} },
+  },
+  isURL: {
+    valid: { mandatoryArgs: { str: 'www.foobar.com' }, optionalArgs: { options: '' } },
+    inValid: { mandatoryArgs: { str: 'www-foobar' }, optionalArgs: { options: '' } },
+  },
+  isUUID: {
+    valid: { mandatoryArgs: { str: 'd3bb98a2-0e77-4663-8c3d-8dfb99f5b773' }, optionalArgs: { version: '' } },
+    inValid: { mandatoryArgs: { str: 'd3bb98a2-7-4663-8c3d-8dfb99f5b773' }, optionalArgs: { version: '' } },
+  },
+  // isUppercase: {
+  //   valid: { mandatoryArgs: { str: 'FOOBAR' }, optionalArgs: {} },
+  //   inValid: { mandatoryArgs: { str: 'foobar' }, optionalArgs: {} },
+  // },
+  isVariableWidth: {
+    valid: { mandatoryArgs: { str: 'ｆｏｏ bar' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: 'ｆｏｏ' }, optionalArgs: {} },
+  },
+  // isWhitelisted: {
+  //   valid: { mandatoryArgs: { str: 'Iouea', chars: 'aeiou' }, optionalArgs: {} },
+  //   inValid: { mandatoryArgs: { str: 'foobar', chars: 'xyz' }, optionalArgs: {} },
+  // },
+  // matches: {
+  //   valid: { mandatoryArgs: { str: '', pattern: '' }, optionalArgs: { modifiers: '' } },
+  //   inValid: { mandatoryArgs: { str: '', pattern: '' }, optionalArgs: { modifiers: '' } },
+  // },
 };
