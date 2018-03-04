@@ -96,6 +96,7 @@ export default class Input extends Component {
                 onChange={this.handleInputChange}
                 onBlur={this.handleOnBlur}
                 onFocus={this.handleOnFocus}
+                ref={this.props.setRef}
               />
               <FormControl.Feedback />
               {validationResult === false
@@ -139,6 +140,7 @@ Input.propTypes = {
   minLengthErrMsg: PropTypes.string,
   maxLength: PropTypes.number,
   maxLengthErrMsg: PropTypes.string,
+  setRef: PropTypes.func,
 };
 
 Input.defaultProps = {
@@ -155,4 +157,5 @@ Input.defaultProps = {
   minLengthErrMsg: null,
   maxLength: null,
   maxLengthErrMsg: null,
+  setRef: () => {},
 };
