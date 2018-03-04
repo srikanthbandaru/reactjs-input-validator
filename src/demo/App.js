@@ -21,9 +21,6 @@ export default class App extends Component {
     const formData = formInputData(this.state.data); // eslint-disable-line no-unused-vars
     // tells you if the entire form validation is true or false
     const isFormValid = formValidation(this.state.data); // eslint-disable-line no-unused-vars
-
-    console.log(this.state.data);
-    console.log(formData);
   }
 
   render() {
