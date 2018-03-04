@@ -36,18 +36,19 @@ export default class App extends Component {
           onChange={this.handleChange}
           className="myCustomCSSClass"
           required
-          requiredErrMsg="This is my custom error message that overrides default error message"
+          length={13}
         />
         <Input
           validator="isAlphanumeric"
           name="userPassword"
           onChange={this.handleChange}
           type="password"
+          minLength={8}
+          maxLength={13}
         />
         <button
           type="submit"
           className="btn btn-primary"
-          disabled={!formValidation(this.state.data)}
         >
           Sign in
         </button>

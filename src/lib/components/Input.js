@@ -104,6 +104,12 @@ export default class Input extends Component {
                     validator={this.props.validator}
                     inputValue={inputValue}
                     requiredErrMsg={this.props.requiredErrMsg}
+                    length={this.props.length}
+                    lengthErrMsg={this.props.lengthErrMsg}
+                    minLength={this.props.minLength}
+                    minLengthErrMsg={this.props.minLengthErrMsg}
+                    maxLength={this.props.maxLength}
+                    maxLengthErrMsg={this.props.maxLengthErrMsg}
                   />
                 :
                   null
@@ -127,6 +133,12 @@ Input.propTypes = {
   required: PropTypes.bool,
   className: PropTypes.string,
   requiredErrMsg: PropTypes.string,
+  length: PropTypes.number,
+  lengthErrMsg: PropTypes.string,
+  minLength: PropTypes.number,
+  minLengthErrMsg: PropTypes.string,
+  maxLength: PropTypes.number,
+  maxLengthErrMsg: PropTypes.string,
 };
 
 Input.defaultProps = {
@@ -137,4 +149,10 @@ Input.defaultProps = {
   required: false,
   className: '',
   requiredErrMsg: null,
+  length: null,
+  lengthErrMsg: null,
+  minLength: null,
+  minLengthErrMsg: null,
+  maxLength: null,
+  maxLengthErrMsg: null,
 };

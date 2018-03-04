@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
-import { errorMessages } from './constants';
+import determineValidatorErrMsgs from '../utils/determineValidatorErrMsgs';
 
 const requiredErrorMessages = props => (
   <HelpBlock>{props.requiredErrMsg ? props.requiredErrMsg : "You can't leave this blank"}</HelpBlock>
 );
 
-const validatorErrorMessages = props => <HelpBlock>{errorMessages[props.validator]}</HelpBlock>;
+const validatorErrorMessages = props => <HelpBlock>{determineValidatorErrMsgs(props)}</HelpBlock>;
 
 const ErrorMessage = props => (
   <div>
@@ -20,10 +20,6 @@ const ErrorMessage = props => (
 
 requiredErrorMessages.propTypes = {
   requiredErrMsg: PropTypes.string.isRequired,
-};
-
-validatorErrorMessages.propTypes = {
-  validator: PropTypes.string.isRequired,
 };
 
 ErrorMessage.propTypes = {
