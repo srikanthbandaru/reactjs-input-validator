@@ -8,6 +8,7 @@ export default class App extends Component {
       data: {},
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(value, name, validationState, isRequired) {
@@ -23,6 +24,18 @@ export default class App extends Component {
     const isFormValid = formValidation(this.state.data); // eslint-disable-line no-unused-vars
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    const isFormValid = formValidation(this.state.data);
+
+    if (isFormValid) {
+      // do something
+    } else {
+      // to do validation and display error msgs for all Inputs in the form
+      Object.keys(this.state.data).map(input => [this[input].focus(), this[input].blur()]);
+    }
+  }
+
   render() {
     const emailOptions = { require_display_name: true };
     return (
@@ -36,18 +49,31 @@ export default class App extends Component {
           onChange={this.handleChange}
           className="myCustomCSSClass"
           required
-          requiredErrMsg="This is my custom error message that overrides default error message"
+          setRef={(input) => { this.userEmail = input; }}
+        />
+        <Input
+          validator="isAlphanumeric"
+          name="userAddress"
+          placeholder="Enter Address"
+          label="Enter Address"
+          onChange={this.handleChange}
+          className="myCustomCSSClass"
+          required
+          setRef={(input) => { this.userAddress = input; }}
         />
         <Input
           validator="isAlphanumeric"
           name="userPassword"
+          setRef={(input) => { this.userPassword = input; }}
           onChange={this.handleChange}
           type="password"
+          minLength={8}
+          maxLength={13}
         />
         <button
           type="submit"
+          onClick={this.handleSubmit}
           className="btn btn-primary"
-          disabled={!formValidation(this.state.data)}
         >
           Sign in
         </button>
