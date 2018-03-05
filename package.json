@@ -14,7 +14,8 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "build-demo": "node scripts/demo.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "coveralls": "node_modules/.bin/jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "dependencies": {
     "prop-types": "^15.6.0",
@@ -33,6 +34,7 @@
     "chalk": "1.1.3",
     "chance": "^1.0.13",
     "copy-webpack-plugin": "^4.3.1",
+    "coveralls": "^3.0.0",
     "css-loader": "0.28.7",
     "dotenv": "4.0.0",
     "enzyme": "^3.3.0",
