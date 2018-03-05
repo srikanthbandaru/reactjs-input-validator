@@ -15,7 +15,7 @@
     "build": "node scripts/build.js",
     "build-demo": "node scripts/demo.js",
     "test": "node scripts/test.js --env=jsdom",
-    "coveralls": "node_modules/.bin/jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "coveralls": "node scripts/test.js --coverage --env=jsdom && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js --env=jsdom"
   },
   "dependencies": {
     "prop-types": "^15.6.0",
