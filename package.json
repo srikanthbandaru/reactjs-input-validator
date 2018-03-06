@@ -1,6 +1,6 @@
 {
   "name": "reactjs-input-validator",
-  "version": "0.13.7",
+  "version": "0.13.8",
   "main": "build/reactjs-input-validator.js",
   "author": "Srikanth Bandaru <srikanthb602@gmail.com>",
   "license": "MIT",
@@ -16,7 +16,7 @@
     "build-demo": "node scripts/demo.js",
     "test": "node scripts/test.js --env=jsdom",
     "predeploy": "npm run build-demo",
-    "deploy": "gh-pages -d demo-build",
+    "deploy": "gh-pages -d demo",
     "coveralls": "node scripts/test.js --coverage --env=jsdom && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js --env=jsdom"
   },
   "dependencies": {
