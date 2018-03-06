@@ -62,7 +62,7 @@ Object.keys(validatorTestArgs).map((validator) => {
       test("default 'required' error message", () => {
         wrapper.setProps({ required: true });
         input.simulate('blur');
-        expect(wrapper.find('span.help-block').text()).toEqual("You can't leave this blank");
+        expect(wrapper.find('span.help-block').text()).toEqual("You can't leave this empty");
         expect(wrapper.find('Glyphicon').exists()).toBeTruthy();
         expect(wrapper.find('Glyphicon').prop('glyph')).toEqual('remove');
       });

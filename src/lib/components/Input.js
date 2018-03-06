@@ -111,6 +111,7 @@ export default class Input extends Component {
                     minLengthErrMsg={this.props.minLengthErrMsg}
                     maxLength={this.props.maxLength}
                     maxLengthErrMsg={this.props.maxLengthErrMsg}
+                    validatorErrMsg={this.props.validatorErrMsg}
                   />
                 :
                   null
@@ -141,6 +142,7 @@ Input.propTypes = {
   maxLength: PropTypes.number,
   maxLengthErrMsg: PropTypes.string,
   setRef: PropTypes.func,
+  validatorErrMsg: PropTypes.string,
 };
 
 Input.defaultProps = {
@@ -159,4 +161,5 @@ Input.defaultProps = {
   maxLength: null,
   maxLengthErrMsg: null,
   setRef: () => {},
+  validatorErrMsg: null,
 };

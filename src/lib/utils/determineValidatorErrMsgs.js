@@ -18,6 +18,8 @@ export default function validatorErrorMessages(props) {
   } else if (props.maxLength && props.maxLengthErrMsg &&
               (props.inputValue.length > props.maxLength)) {
     return `${props.maxLengthErrMsg}`;
+  } else if (props.validatorErrMsg) {
+    return props.validatorErrMsg;
   }
   return `${errorMessages[props.validator]}`; // validator error message
 }
