@@ -8,13 +8,15 @@
     "type": "git",
     "url": "https://github.com/SrikanthBandaru/reactjs-input-validator"
   },
-  "homepage": "https://github.com/SrikanthBandaru/reactjs-input-validator#readme",
+  "homepage": "https://srikanthbandaru.github.io/reactjs-input-validator/",
   "description": "An input validator built for Reactjs using the awesomeness of valiidator.js",
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "build-demo": "node scripts/demo.js",
     "test": "node scripts/test.js --env=jsdom",
+    "predeploy": "npm run build-demo",
+    "deploy": "gh-pages -d demo-build",
     "coveralls": "node scripts/test.js --coverage --env=jsdom && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js --env=jsdom"
   },
   "dependencies": {
@@ -50,6 +52,7 @@
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.5",
     "fs-extra": "3.0.1",
+    "gh-pages": "^1.1.0",
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
     "object-assign": "4.1.1",
