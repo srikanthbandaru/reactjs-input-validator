@@ -125,7 +125,7 @@ export default class Input extends Component {
 }
 
 Input.propTypes = {
-  validator: PropTypes.string.isRequired,
+  validator: PropTypes.string,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   type: PropTypes.string,
@@ -144,6 +144,7 @@ Input.propTypes = {
 };
 
 Input.defaultProps = {
+  validator: null,
   placeholder: '',
   type: 'text',
   label: null,
