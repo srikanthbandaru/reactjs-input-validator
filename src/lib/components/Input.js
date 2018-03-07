@@ -92,6 +92,7 @@ export default class Input extends Component {
                 type={inputType}
                 placeholder={this.props.placeholder}
                 name={this.props.name}
+                id={this.props.id}
                 value={inputValue}
                 onChange={this.handleInputChange}
                 onBlur={this.handleOnBlur}
@@ -127,6 +128,7 @@ export default class Input extends Component {
 
 Input.propTypes = {
   className: PropTypes.string,
+  id: PropTypes.string,
   label: PropTypes.string,
   length: PropTypes.number,
   lengthErrMsg: PropTypes.string,
@@ -147,6 +149,7 @@ Input.propTypes = {
 
 Input.defaultProps = {
   className: '',
+  id: null,
   label: null,
   length: null,
   lengthErrMsg: null,
