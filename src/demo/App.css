@@ -1,0 +1,11 @@
+form.example {
+  padding: 8.5rem;
+  margin-right: 0;
+  margin-left: 0;
+  border-width: .2rem;
+}
+
+pre.resultBlock {
+    display: block;
+    margin-top: 1em;
+}

@@ -43,7 +43,7 @@ export default class Input extends Component {
     const inputValue = event ? event.target.value : this.state.inputValue;
     if (this.props.onChange) {
       this.props.onChange(
-        inputValue, this.props.name,
+        null, inputValue, this.props.name,
         this.handleValidation(inputValue),
         this.props.required,
       );
