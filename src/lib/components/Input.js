@@ -71,12 +71,7 @@ export default class Input extends Component {
 
   render() {
     const { inputValue, validationResult } = this.state;
-    const validationState =
-      validationResult // eslint-disable-line no-nested-ternary
-        ? 'success'
-        : validationResult === false
-          ? 'error'
-          : null;
+    const validationState = ({ true: 'success', false: 'error' })[validationResult] || null;
 
     const inputType = this.props.type ? this.props.type : 'text';
     const inputClassName = `form-control ${this.props.className}`;
