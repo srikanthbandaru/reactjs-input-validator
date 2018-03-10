@@ -15,7 +15,7 @@ export default function formValidation(data) {
   });
 
   const isFormValid = Object.keys(validationStatus).map(k => validationStatus[k]);
-  if (isFormValid.includes(false) || isFormValid.includes(undefined) || isFormValid.length === 0) {
+  if (isFormValid.length === 0 || isFormValid.includes(false) || isFormValid.includes(undefined)) {
     return false;
   }
 

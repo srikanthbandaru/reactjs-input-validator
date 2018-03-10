@@ -72,8 +72,6 @@ export default class Input extends Component {
   render() {
     const { inputValue, validationResult } = this.state;
     const validationState = ({ true: 'success', false: 'error' })[validationResult] || null;
-
-    const inputType = this.props.type ? this.props.type : 'text';
     const inputClassName = `form-control ${this.props.className}`;
 
     return (
@@ -81,10 +79,10 @@ export default class Input extends Component {
         {this.constructor.isInputTypeSupported(this.props.type)
           ?
             <FormGroup controlId={this.props.name} validationState={validationState}>
-              {this.props.label ? <ControlLabel>{this.props.label}</ControlLabel> : null}
+              {this.props.label && <ControlLabel>{this.props.label}</ControlLabel>}
               <input
                 className={inputClassName}
-                type={inputType}
+                type={this.props.type}
                 placeholder={this.props.placeholder}
                 name={this.props.name}
                 id={this.props.id}
