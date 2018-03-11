@@ -3,10 +3,40 @@ import { mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Chance from 'chance';
 import Input from '../Input';
-import { validatorTestArgs } from '../constants';
+import { validatorTestArgs, errorMessages } from '../constants';
 
 configure({ adapter: new Adapter() });
 const chance = new Chance();
+
+function itShouldDisplayError(wrapper, input, errorMessage) {
+  input.simulate('blur');
+  expect(wrapper.find('Glyphicon').exists()).toBeTruthy();
+  expect(wrapper.find('span.help-block').text()).toEqual(errorMessage);
+  expect(wrapper.find('Glyphicon').prop('glyph')).toEqual('remove');
+  expect(wrapper.find('ErrorMessage').exists()).toBeTruthy();
+}
+
+function itShouldDisplaySuccess(wrapper, input, inputValue) {
+  input.simulate('change', { target: { value: inputValue } });
+  expect(wrapper.state('inputValue')).toEqual(inputValue);
+  input.simulate('blur');
+  expect(wrapper.find('Glyphicon').exists()).toBeTruthy();
+  expect(wrapper.find('Glyphicon').prop('glyph')).toEqual('ok');
+  expect(wrapper.find('ErrorMessage').exists()).toBeFalsy();
+}
+
+describe('reactjs-input-validator if required prop alone is sent', () => {
+  const wrapper = mount(<Input required name="requiredValidation" />);
+  const input = wrapper.find('input.form-control');
+
+  test('should display error msg if input is empty', () => {
+    itShouldDisplayError(wrapper, input, "You can't leave this empty");
+  });
+
+  test('should not display empty error msg if input not empty', () => {
+    itShouldDisplaySuccess(wrapper, input, 'test input');
+  });
+});
 
 Object.keys(validatorTestArgs).map((validator) => {
   describe(`reactjs-input-validator for validator --${validator}--`, () => {
@@ -31,13 +61,7 @@ Object.keys(validatorTestArgs).map((validator) => {
           }
           return null;
         });
-
-        input.simulate('change', { target: { value: mandatoryArgs.str } });
-        expect(wrapper.state('inputValue')).toEqual(mandatoryArgs.str);
-        input.simulate('blur');
-        expect(wrapper.find('Glyphicon').exists()).toBeTruthy();
-        expect(wrapper.find('Glyphicon').prop('glyph')).toEqual('ok');
-        expect(wrapper.find('ErrorMessage').exists()).toBeFalsy();
+        itShouldDisplaySuccess(wrapper, input, mandatoryArgs.str);
       });
 
       test('for inValid input', () => {
@@ -51,30 +75,21 @@ Object.keys(validatorTestArgs).map((validator) => {
 
         input.simulate('change', { target: { value: mandatoryArgs.str } });
         expect(wrapper.state('inputValue')).toEqual(mandatoryArgs.str);
-        input.simulate('blur');
-        expect(wrapper.find('Glyphicon').exists()).toBeTruthy();
-        expect(wrapper.find('Glyphicon').prop('glyph')).toEqual('remove');
-        expect(wrapper.find('ErrorMessage').exists()).toBeTruthy();
+        itShouldDisplayError(wrapper, input, `${errorMessages[validator]}`);
       });
     });
 
     describe("should display error message if 'required' input value is empty with", () => {
       test("default 'required' error message", () => {
         wrapper.setProps({ required: true });
-        input.simulate('blur');
-        expect(wrapper.find('span.help-block').text()).toEqual("You can't leave this empty");
-        expect(wrapper.find('Glyphicon').exists()).toBeTruthy();
-        expect(wrapper.find('Glyphicon').prop('glyph')).toEqual('remove');
+        itShouldDisplayError(wrapper, input, "You can't leave this empty");
       });
 
       test("custom 'required' error message when 'requiredErrMsg' prop is passed", () => {
         wrapper.setProps({ required: true });
         const requiredErrMsg = chance.sentence();
         wrapper.setProps({ requiredErrMsg });
-        input.simulate('blur');
-        expect(wrapper.find('span.help-block').text()).toEqual(requiredErrMsg);
-        expect(wrapper.find('Glyphicon').exists()).toBeTruthy();
-        expect(wrapper.find('Glyphicon').prop('glyph')).toEqual('remove');
+        itShouldDisplayError(wrapper, input, requiredErrMsg);
       });
     });
 
@@ -84,10 +99,7 @@ Object.keys(validatorTestArgs).map((validator) => {
           wrapper.setProps({ length: 8 });
           input.simulate('change', { target: { value: 'abcd' } });
           expect(wrapper.state('inputValue')).toEqual('abcd');
-          input.simulate('blur');
-          expect(wrapper.find('span.help-block').text()).toEqual('This should be 8 characters');
-          expect(wrapper.find('Glyphicon').exists()).toBeTruthy();
-          expect(wrapper.find('Glyphicon').prop('glyph')).toEqual('remove');
+          itShouldDisplayError(wrapper, input, 'This should be 8 characters');
         });
 
         test("custom error message if 'lengthErrMsg' prop is passed", () => {
@@ -96,10 +108,7 @@ Object.keys(validatorTestArgs).map((validator) => {
           expect(wrapper.state('inputValue')).toEqual('abcd');
           const lengthErrMsg = chance.sentence();
           wrapper.setProps({ lengthErrMsg });
-          input.simulate('blur');
-          expect(wrapper.find('span.help-block').text()).toEqual(lengthErrMsg);
-          expect(wrapper.find('Glyphicon').exists()).toBeTruthy();
-          expect(wrapper.find('Glyphicon').prop('glyph')).toEqual('remove');
+          itShouldDisplayError(wrapper, input, lengthErrMsg);
         });
       });
     });
@@ -110,10 +119,7 @@ Object.keys(validatorTestArgs).map((validator) => {
           wrapper.setProps({ minLength: 4 });
           input.simulate('change', { target: { value: 'abc' } });
           expect(wrapper.state('inputValue')).toEqual('abc');
-          input.simulate('blur');
-          expect(wrapper.find('span.help-block').text()).toEqual('Enter atleast 4 characters');
-          expect(wrapper.find('Glyphicon').exists()).toBeTruthy();
-          expect(wrapper.find('Glyphicon').prop('glyph')).toEqual('remove');
+          itShouldDisplayError(wrapper, input, 'Enter atleast 4 characters');
         });
 
         test("custom error message if 'minLengthErrMsg' prop is passed", () => {
@@ -122,10 +128,7 @@ Object.keys(validatorTestArgs).map((validator) => {
           expect(wrapper.state('inputValue')).toEqual('abc');
           const minLengthErrMsg = chance.sentence();
           wrapper.setProps({ minLengthErrMsg });
-          input.simulate('blur');
-          expect(wrapper.find('span.help-block').text()).toEqual(minLengthErrMsg);
-          expect(wrapper.find('Glyphicon').exists()).toBeTruthy();
-          expect(wrapper.find('Glyphicon').prop('glyph')).toEqual('remove');
+          itShouldDisplayError(wrapper, input, minLengthErrMsg);
         });
       });
     });
@@ -136,10 +139,7 @@ Object.keys(validatorTestArgs).map((validator) => {
           wrapper.setProps({ maxLength: 6 });
           input.simulate('change', { target: { value: 'abcdefg' } });
           expect(wrapper.state('inputValue')).toEqual('abcdefg');
-          input.simulate('blur');
-          expect(wrapper.find('span.help-block').text()).toEqual('Must have atmost 6 characters');
-          expect(wrapper.find('Glyphicon').exists()).toBeTruthy();
-          expect(wrapper.find('Glyphicon').prop('glyph')).toEqual('remove');
+          itShouldDisplayError(wrapper, input, 'Must have atmost 6 characters');
         });
 
         test("custom error message if 'maxLengthErrMsg' prop is passed", () => {
@@ -148,10 +148,7 @@ Object.keys(validatorTestArgs).map((validator) => {
           expect(wrapper.state('inputValue')).toEqual('abcdefg');
           const maxLengthErrMsg = chance.sentence();
           wrapper.setProps({ maxLengthErrMsg });
-          input.simulate('blur');
-          expect(wrapper.find('span.help-block').text()).toEqual(maxLengthErrMsg);
-          expect(wrapper.find('Glyphicon').exists()).toBeTruthy();
-          expect(wrapper.find('Glyphicon').prop('glyph')).toEqual('remove');
+          itShouldDisplayError(wrapper, input, maxLengthErrMsg);
         });
       });
     });
