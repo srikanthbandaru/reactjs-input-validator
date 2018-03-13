@@ -2,7 +2,6 @@
 # ReactJS Input Validator
 
 <p align="center">
-  <a href="https://unpkg.com/reactjs-input-validator@0.14.1/build/reactjs-input-validator.js"><img src="http://img.badgesize.io/https://unpkg.com/reactjs-input-validator@0.14.1/build/reactjs-input-validator.js?compression=gzip" alt="gzip-size"></a>
   <a href="https://travis-ci.org/srikanthbandaru/reactjs-input-validator"><img src="https://travis-ci.org/srikanthbandaru/reactjs-input-validator.svg?branch=master" alt="travis"></a>
   <a href="https://www.npmjs.com/package/reactjs-input-validator"><img src="https://badge.fury.io/js/reactjs-input-validator.svg" alt="npm version"></a>
   <a href="https://coveralls.io/github/srikanthbandaru/reactjs-input-validator?branch=master"><img src="https://coveralls.io/repos/github/srikanthbandaru/reactjs-input-validator/badge.svg?branch=master" alt="coveralls badge"></a>
