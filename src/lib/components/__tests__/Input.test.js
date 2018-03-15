@@ -74,9 +74,16 @@ Object.keys(validatorTestArgs).map((validator) => {
     describe('should validate the user input', () => {
       test('for valid input', () => {
         const { mandatoryArgs } = validatorTestArgs[validator].valid;
+        const { optionalArgs } = validatorTestArgs[validator].valid;
         Object.keys(mandatoryArgs).map((mandatoryArg) => {
           if (mandatoryArg !== 'str') {
             wrapper.setProps({ [mandatoryArg]: mandatoryArgs[mandatoryArg] });
+          }
+          return null;
+        });
+        Object.keys(optionalArgs).map((optionalArg) => {
+          if (optionalArgs[optionalArg] !== '') {
+            wrapper.setProps({ [optionalArg]: optionalArgs[optionalArg] });
           }
           return null;
         });
@@ -85,10 +92,17 @@ Object.keys(validatorTestArgs).map((validator) => {
 
       test('for inValid input', () => {
         const { mandatoryArgs } = validatorTestArgs[validator].inValid;
+        const { optionalArgs } = validatorTestArgs[validator].valid;
         const errorMessage = errorMessages[validator] || 'Enter valid input';
         Object.keys(mandatoryArgs).map((mandatoryArg) => {
           if (mandatoryArg !== 'str') {
             wrapper.setProps({ [mandatoryArg]: mandatoryArgs[mandatoryArg] });
+          }
+          return null;
+        });
+        Object.keys(optionalArgs).map((optionalArg) => {
+          if (optionalArgs[optionalArg] !== '') {
+            wrapper.setProps({ [optionalArg]: optionalArgs[optionalArg] });
           }
           return null;
         });

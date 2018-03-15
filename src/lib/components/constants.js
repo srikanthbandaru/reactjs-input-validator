@@ -137,10 +137,10 @@ export const validatorTestArgs = {
     valid: { mandatoryArgs: { str: 'true' }, optionalArgs: {} },
     inValid: { mandatoryArgs: { str: 'foo bar' }, optionalArgs: {} },
   },
-  // isByteLength: {
-  //   valid: { mandatoryArgs: { str: '' }, optionalArgs: { options: '' } },
-  //   inValid: { mandatoryArgs: { str: '' }, optionalArgs: { options: '' } },
-  // },
+  isByteLength: {
+    valid: { mandatoryArgs: { str: 'abc' }, optionalArgs: { options: { min: 3, max: 5 } } },
+    inValid: { mandatoryArgs: { str: 'abcdefg' }, optionalArgs: { options: { min: 3, max: 5 } } },
+  },
   isCreditCard: {
     valid: { mandatoryArgs: { str: '4111111111111111' }, optionalArgs: {} },
     inValid: { mandatoryArgs: { str: '3213' }, optionalArgs: {} },
