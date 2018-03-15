@@ -8,7 +8,11 @@ import { validatorTestArgs, errorMessages } from '../constants';
 configure({ adapter: new Adapter() });
 const chance = new Chance();
 
-function itShouldDisplayError(wrapper, input, errorMessage) {
+function itShouldDisplayError(wrapper, input, errorMessage, inputValue) {
+  if (inputValue) {
+    input.simulate('change', { target: { value: inputValue } });
+    expect(wrapper.state('inputValue')).toEqual(inputValue);
+  }
   input.simulate('blur');
   expect(wrapper.find('Glyphicon').exists()).toBeTruthy();
   expect(wrapper.find('span.help-block').text()).toEqual(errorMessage);
@@ -17,8 +21,10 @@ function itShouldDisplayError(wrapper, input, errorMessage) {
 }
 
 function itShouldDisplaySuccess(wrapper, input, inputValue) {
-  input.simulate('change', { target: { value: inputValue } });
-  expect(wrapper.state('inputValue')).toEqual(inputValue);
+  if (inputValue) {
+    input.simulate('change', { target: { value: inputValue } });
+    expect(wrapper.state('inputValue')).toEqual(inputValue);
+  }
   input.simulate('blur');
   expect(wrapper.find('Glyphicon').exists()).toBeTruthy();
   expect(wrapper.find('Glyphicon').prop('glyph')).toEqual('ok');
@@ -35,6 +41,19 @@ describe('reactjs-input-validator if required prop alone is sent', () => {
 
   test('should not display empty error msg if input not empty', () => {
     itShouldDisplaySuccess(wrapper, input, 'test input');
+  });
+});
+
+describe('reactjs-input-validator if length prop alone is sent', () => {
+  const wrapper = mount(<Input length={6} name="lengthValidation" />);
+  const input = wrapper.find('input.form-control');
+
+  test('should display error msg if input characters length does not match', () => {
+    itShouldDisplayError(wrapper, input, 'This should be 6 characters', 'abcdefg');
+  });
+
+  test('should not display empty error msg if input characters length matches', () => {
+    itShouldDisplaySuccess(wrapper, input, 'abcdef');
   });
 });
 

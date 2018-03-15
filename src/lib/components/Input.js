@@ -93,22 +93,19 @@ export default class Input extends Component {
                 ref={this.props.setRef}
               />
               <FormControl.Feedback />
-              {validationResult === false
-                ?
-                  <ErrorMessage
-                    validator={this.props.validator}
-                    inputValue={inputValue}
-                    requiredErrMsg={this.props.requiredErrMsg}
-                    length={this.props.length}
-                    lengthErrMsg={this.props.lengthErrMsg}
-                    minLength={this.props.minLength}
-                    minLengthErrMsg={this.props.minLengthErrMsg}
-                    maxLength={this.props.maxLength}
-                    maxLengthErrMsg={this.props.maxLengthErrMsg}
-                    validatorErrMsg={this.props.validatorErrMsg}
-                  />
-                :
-                  null
+              {validationResult === false &&
+                <ErrorMessage
+                  validator={this.props.validator}
+                  inputValue={inputValue}
+                  requiredErrMsg={this.props.requiredErrMsg}
+                  length={this.props.length}
+                  lengthErrMsg={this.props.lengthErrMsg}
+                  minLength={this.props.minLength}
+                  minLengthErrMsg={this.props.minLengthErrMsg}
+                  maxLength={this.props.maxLength}
+                  maxLengthErrMsg={this.props.maxLengthErrMsg}
+                  validatorErrMsg={this.props.validatorErrMsg}
+                />
               }
             </FormGroup>
           :
