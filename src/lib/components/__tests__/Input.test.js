@@ -72,9 +72,9 @@ Object.keys(validatorTestArgs).map((validator) => {
     });
 
     describe('should validate the user input', () => {
-      test('for valid input', () => {
-        const { mandatoryArgs } = validatorTestArgs[validator].valid;
-        const { optionalArgs } = validatorTestArgs[validator].valid;
+      function passArgumentsAsProps(type) {
+        const { mandatoryArgs } = validatorTestArgs[validator][type];
+        const { optionalArgs } = validatorTestArgs[validator][type];
         Object.keys(mandatoryArgs).map((mandatoryArg) => {
           if (mandatoryArg !== 'str') {
             wrapper.setProps({ [mandatoryArg]: mandatoryArgs[mandatoryArg] });
@@ -87,29 +87,25 @@ Object.keys(validatorTestArgs).map((validator) => {
           }
           return null;
         });
-        itShouldDisplaySuccess(wrapper, input, mandatoryArgs.str);
+      }
+
+      test('for valid input', () => {
+        passArgumentsAsProps('valid');
+        const inputValue = validatorTestArgs[validator].valid.mandatoryArgs.str;
+        itShouldDisplaySuccess(
+          wrapper, input,
+          inputValue,
+        );
       });
 
       test('for inValid input', () => {
-        const { mandatoryArgs } = validatorTestArgs[validator].inValid;
-        const { optionalArgs } = validatorTestArgs[validator].valid;
         const errorMessage = errorMessages[validator] || 'Enter valid input';
-        Object.keys(mandatoryArgs).map((mandatoryArg) => {
-          if (mandatoryArg !== 'str') {
-            wrapper.setProps({ [mandatoryArg]: mandatoryArgs[mandatoryArg] });
-          }
-          return null;
-        });
-        Object.keys(optionalArgs).map((optionalArg) => {
-          if (optionalArgs[optionalArg] !== '') {
-            wrapper.setProps({ [optionalArg]: optionalArgs[optionalArg] });
-          }
-          return null;
-        });
-
-        input.simulate('change', { target: { value: mandatoryArgs.str } });
-        expect(wrapper.state('inputValue')).toEqual(mandatoryArgs.str);
-        itShouldDisplayError(wrapper, input, errorMessage);
+        const inputValue = validatorTestArgs[validator].inValid.mandatoryArgs.str;
+        passArgumentsAsProps('inValid');
+        itShouldDisplayError(
+          wrapper, input, errorMessage,
+          inputValue,
+        );
       });
     });
 
