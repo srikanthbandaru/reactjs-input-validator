@@ -16,5 +16,5 @@ export default function validatorErrorMessages(props) {
   } else if (maxLength && (inputValue.length > maxLength)) { // maximum length error messages
     return maxLengthErrMsg || `Must have atmost ${props.maxLength} characters`;
   }
-  return validatorErrMsg || `${errorMessages[validator]}`; // validator error message
+  return validatorErrMsg || errorMessages[validator] || 'Enter valid input'; // validator error message
 }

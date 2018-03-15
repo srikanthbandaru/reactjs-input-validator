@@ -85,6 +85,7 @@ Object.keys(validatorTestArgs).map((validator) => {
 
       test('for inValid input', () => {
         const { mandatoryArgs } = validatorTestArgs[validator].inValid;
+        const errorMessage = errorMessages[validator] || 'Enter valid input';
         Object.keys(mandatoryArgs).map((mandatoryArg) => {
           if (mandatoryArg !== 'str') {
             wrapper.setProps({ [mandatoryArg]: mandatoryArgs[mandatoryArg] });
@@ -94,7 +95,7 @@ Object.keys(validatorTestArgs).map((validator) => {
 
         input.simulate('change', { target: { value: mandatoryArgs.str } });
         expect(wrapper.state('inputValue')).toEqual(mandatoryArgs.str);
-        itShouldDisplayError(wrapper, input, `${errorMessages[validator]}`);
+        itShouldDisplayError(wrapper, input, errorMessage);
       });
     });
 
