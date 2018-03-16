@@ -225,10 +225,10 @@ export const validatorTestArgs = {
     valid: { mandatoryArgs: { str: '20905076' }, optionalArgs: { options: '' } },
     inValid: { mandatoryArgs: { str: '12345' }, optionalArgs: { options: '' } },
   },
-  // isIn: {
-  //   valid: { mandatoryArgs: { str: 'foo', values: 'foobar' }, optionalArgs: {} },
-  //   inValid: { mandatoryArgs: { str: 'foo', values: 'bar' }, optionalArgs: {} },
-  // },
+  isIn: {
+    valid: { mandatoryArgs: { str: 'foo', values: 'foobar' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: 'foo', values: 'bar' }, optionalArgs: {} },
+  },
   isInt: {
     valid: { mandatoryArgs: { str: '1234' }, optionalArgs: { options: '' } },
     inValid: { mandatoryArgs: { str: '123.123' }, optionalArgs: { options: '' } },
