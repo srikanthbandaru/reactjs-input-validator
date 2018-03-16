@@ -205,10 +205,10 @@ export const validatorTestArgs = {
     valid: { mandatoryArgs: { str: '978-3-16-148410-0' }, optionalArgs: { version: '' } },
     inValid: { mandatoryArgs: { str: '123456' }, optionalArgs: { version: '' } },
   },
-  // isISIN: {
-  //   valid: { mandatoryArgs: { str: '6166' }, optionalArgs: {} },
-  //   inValid: { mandatoryArgs: { str: '12345' }, optionalArgs: {} },
-  // },
+  isISIN: {
+    valid: { mandatoryArgs: { str: 'AU0000XVGZA3' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: '12345' }, optionalArgs: {} },
+  },
   isISO31661Alpha2: {
     valid: { mandatoryArgs: { str: 'US' }, optionalArgs: {} },
     inValid: { mandatoryArgs: { str: 'zzz' }, optionalArgs: {} },
