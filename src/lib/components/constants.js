@@ -309,8 +309,8 @@ export const validatorTestArgs = {
     valid: { mandatoryArgs: { str: 'iouea', chars: 'aeiou' }, optionalArgs: {} },
     inValid: { mandatoryArgs: { str: 'foobar', chars: 'xyz' }, optionalArgs: {} },
   },
-  // matches: {
-  //   valid: { mandatoryArgs: { str: '', pattern: '' }, optionalArgs: { modifiers: '' } },
-  //   inValid: { mandatoryArgs: { str: '', pattern: '' }, optionalArgs: { modifiers: '' } },
-  // },
+  matches: {
+    valid: { mandatoryArgs: { str: 'foobar', pattern: 'foo' }, optionalArgs: { modifiers: '' } },
+    inValid: { mandatoryArgs: { str: 'foo', pattern: 'bar' }, optionalArgs: { modifiers: '' } },
+  },
 };
