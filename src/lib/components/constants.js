@@ -245,10 +245,10 @@ export const validatorTestArgs = {
   //   valid: { mandatoryArgs: { str: 'abcd' }, optionalArgs: { options: '' } },
   //   inValid: { mandatoryArgs: { str: '' }, optionalArgs: { options: '' } },
   // },
-  // isLowercase: {
-  //   valid: { mandatoryArgs: { str: 'foobar' }, optionalArgs: {} },
-  //   inValid: { mandatoryArgs: { str: 'FOOBAR' }, optionalArgs: {} },
-  // },
+  isLowercase: {
+    valid: { mandatoryArgs: { str: 'foobar' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: 'FOOBAR' }, optionalArgs: {} },
+  },
   isMACAddress: {
     valid: { mandatoryArgs: { str: '4C:9F:0A:7B:30:25' }, optionalArgs: {} },
     inValid: { mandatoryArgs: { str: '12345' }, optionalArgs: {} },
@@ -297,18 +297,18 @@ export const validatorTestArgs = {
     valid: { mandatoryArgs: { str: 'd3bb98a2-0e77-4663-8c3d-8dfb99f5b773' }, optionalArgs: { version: '' } },
     inValid: { mandatoryArgs: { str: 'd3bb98a2-7-4663-8c3d-8dfb99f5b773' }, optionalArgs: { version: '' } },
   },
-  // isUppercase: {
-  //   valid: { mandatoryArgs: { str: 'FOOBAR' }, optionalArgs: {} },
-  //   inValid: { mandatoryArgs: { str: 'foobar' }, optionalArgs: {} },
-  // },
+  isUppercase: {
+    valid: { mandatoryArgs: { str: 'FOOBAR' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: 'foobar' }, optionalArgs: {} },
+  },
   isVariableWidth: {
     valid: { mandatoryArgs: { str: 'ｆｏｏ bar' }, optionalArgs: {} },
     inValid: { mandatoryArgs: { str: 'ｆｏｏ' }, optionalArgs: {} },
   },
-  // isWhitelisted: {
-  //   valid: { mandatoryArgs: { str: 'Iouea', chars: 'aeiou' }, optionalArgs: {} },
-  //   inValid: { mandatoryArgs: { str: 'foobar', chars: 'xyz' }, optionalArgs: {} },
-  // },
+  isWhitelisted: {
+    valid: { mandatoryArgs: { str: 'iouea', chars: 'aeiou' }, optionalArgs: {} },
+    inValid: { mandatoryArgs: { str: 'foobar', chars: 'xyz' }, optionalArgs: {} },
+  },
   // matches: {
   //   valid: { mandatoryArgs: { str: '', pattern: '' }, optionalArgs: { modifiers: '' } },
   //   inValid: { mandatoryArgs: { str: '', pattern: '' }, optionalArgs: { modifiers: '' } },
