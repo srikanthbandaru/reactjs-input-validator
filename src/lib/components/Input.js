@@ -31,11 +31,6 @@ export default class Input extends Component {
       inputValue: event.target.value,
     });
     this.sendInputData(event);
-
-    // reset the validation result to null IF (input field is empty) AND (input is not required)
-    if (event.target.value === '' && !this.props.required) {
-      this.setState({ validationResult: null });
-    }
   }
 
   sendInputData(event) {
