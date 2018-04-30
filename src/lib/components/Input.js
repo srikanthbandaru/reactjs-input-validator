@@ -14,7 +14,7 @@ export default class Input extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { inputValue: '', validationResult: null };
+    this.state = { validationResult: null };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleOnBlur = this.handleOnBlur.bind(this);
     this.handleValidation = this.handleValidation.bind(this);
@@ -27,19 +27,16 @@ export default class Input extends Component {
   }
 
   handleInputChange(event) {
-    this.setState({
-      inputValue: event.target.value,
-    });
     this.sendInputData(event);
   }
 
   sendInputData(event) {
     // If the user wants to have access to the input data and input validation
-    const inputValue = event ? event.target.value : this.state.inputValue;
     if (this.props.onChange) {
+      const initialInputValue = '';
       this.props.onChange(
-        null, inputValue, this.props.name,
-        this.handleValidation(inputValue),
+        event, initialInputValue, this.props.name,
+        this.handleValidation(initialInputValue),
         this.props.required,
       );
     }
@@ -51,7 +48,7 @@ export default class Input extends Component {
 
   handleOnBlur() {
     // checking validation result on blur even to display the error/success styles
-    const { inputValue } = this.state;
+    const inputValue = this.props.value.value;
     const { required } = this.props;
 
     // do the validation only IF (input is empty) AND (input not required) FAILS
@@ -65,7 +62,8 @@ export default class Input extends Component {
   }
 
   render() {
-    const { inputValue, validationResult } = this.state;
+    const inputValue = this.props.value.value;
+    const { validationResult } = this.state;
     const validationState = ({ true: 'success', false: 'error' })[validationResult] || null;
     const inputClassName = `form-control ${this.props.className}`;
 
@@ -130,6 +128,7 @@ Input.propTypes = {
   type: PropTypes.string,
   validator: PropTypes.string,
   validatorErrMsg: PropTypes.string,
+  value: PropTypes.object, // eslint-disable-line
 };
 
 Input.defaultProps = {
@@ -150,4 +149,5 @@ Input.defaultProps = {
   type: 'text',
   validator: null,
   validatorErrMsg: null,
+  value: { value: '' },
 };

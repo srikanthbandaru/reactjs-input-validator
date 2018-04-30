@@ -14,38 +14,47 @@ export default class App extends Component {
   }
 
   handleChange(event, inputValue, inputName, validationState, isRequired) {
-    const targetValue = event ? event.target.value : null;
-    const value = event ? targetValue : inputValue;
-    const name = event ? event.target.name : inputName;
+    const value = (event && event.target.value) || inputValue;
     const { data } = this.state;
-    data[name] = { value, validation: validationState, isRequired };
+    data[inputName] = { value, validation: validationState, isRequired };
     this.setState({
       data,
     });
-
+    // this.copyAcross(inputName);
     // if you want access to your form data
     const formData = formInputData(this.state.data); // eslint-disable-line no-unused-vars
     // tells you if the entire form validation is true or false
     const isFormValid = formValidation(this.state.data); // eslint-disable-line no-unused-vars
   }
 
+  // copyAcross() {
+  //   const { data } = this.state;
+  //   const { value } = this.state.data.fullName;
+  //   data.email = { value, validation: null, isRequired: true };
+  //   this.setState([
+  //     data,
+  //   ]);
+  //   setTimeout(this.email.focus(), 5000);
+  //   setTimeout(this.email.blur(), 5000);
+  // }
+
   handleSubmit(event) {
     event.preventDefault();
     const isFormValid = formValidation(this.state.data);
+    // this.copyAcross();
 
     if (isFormValid) {
       // do something
       this.setState({ callAPI: true });
     } else {
+      this.setState({ callAPI: true });
       // to do validation and display error msgs for all Inputs in the form
       Object.keys(this.state.data).map(input => [this[input].focus(), this[input].blur()]);
     }
   }
 
   render() {
-    const passwordValue = this.state.data.password && this.state.data.password.value
-      ? this.state.data.password.value
-      : null;
+    const passwordValue = this.state.data.password && this.state.data.password.value;
 
     return (
       <form className="example">
@@ -60,6 +69,7 @@ export default class App extends Component {
               required
               label="Full Name" name="fullName" placeholder="First Last"
               onChange={this.handleChange}
+              value={this.state.data.fullName}
               setRef={(input) => { this.fullName = input; }}
             />
 
@@ -75,6 +85,7 @@ export default class App extends Component {
               validator="isEmail" required
               label="Email" name="email" placeholder="Email"
               onChange={this.handleChange}
+              value={this.state.data.email}
               setRef={(input) => { this.email = input; }}
             />
 
@@ -94,6 +105,7 @@ export default class App extends Component {
               minLengthErrMsg="Short passwords are easy to guess. Try one with atleast 8 characters"
               label="Create a password" name="password" type="password" placeholder="Password"
               onChange={this.handleChange}
+              value={this.state.data.password}
               setRef={(input) => { this.password = input; }}
             />
 
@@ -110,6 +122,7 @@ export default class App extends Component {
               validatorErrMsg="These passwords don't match. Try again?"
               label="Confirm password" name="confirmPassword" type="password" placeholder="Password"
               onChange={this.handleChange}
+              value={this.state.data.confirmPassword}
               setRef={(input) => { this.confirmPassword = input; }}
             />
 
@@ -125,6 +138,7 @@ export default class App extends Component {
           requiredErrMsg="Enter your address so we can send you awesome stuff"
           label="Address" name="address" placeholder="1234 Main St"
           onChange={this.handleChange}
+          value={this.state.data.address}
           setRef={(input) => { this.address = input; }}
         />
 
@@ -135,6 +149,7 @@ export default class App extends Component {
           label="Address 2"
           name="address2" placeholder="Apartment, studio, or floor"
           onChange={this.handleChange}
+          value={this.state.data.address2}
           setRef={(input) => { this.address2 = input; }}
         />
 
@@ -150,6 +165,7 @@ export default class App extends Component {
               maxLength={20} required label="City"
               name="inputCity"
               onChange={this.handleChange}
+              value={this.state.data.inputCity}
               setRef={(input) => { this.inputCity = input; }}
             />
 
@@ -185,6 +201,7 @@ export default class App extends Component {
               validatorErrMsg="Enter a valid US Zip"
               label="Zip" name="inputZip"
               onChange={this.handleChange}
+              value={this.state.data.inputZip}
               setRef={(input) => { this.inputZip = input; }}
             />
           </Col>
