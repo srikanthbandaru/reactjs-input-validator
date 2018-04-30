@@ -20,28 +20,15 @@ export default class App extends Component {
     this.setState({
       data,
     });
-    // this.copyAcross(inputName);
     // if you want access to your form data
     const formData = formInputData(this.state.data); // eslint-disable-line no-unused-vars
     // tells you if the entire form validation is true or false
     const isFormValid = formValidation(this.state.data); // eslint-disable-line no-unused-vars
   }
 
-  // copyAcross() {
-  //   const { data } = this.state;
-  //   const { value } = this.state.data.fullName;
-  //   data.email = { value, validation: null, isRequired: true };
-  //   this.setState([
-  //     data,
-  //   ]);
-  //   setTimeout(this.email.focus(), 5000);
-  //   setTimeout(this.email.blur(), 5000);
-  // }
-
   handleSubmit(event) {
     event.preventDefault();
     const isFormValid = formValidation(this.state.data);
-    // this.copyAcross();
 
     if (isFormValid) {
       // do something
