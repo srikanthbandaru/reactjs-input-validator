@@ -33,7 +33,7 @@ export default class Input extends Component {
   sendInputData(event) {
     // If the user wants to have access to the input data and input validation
     if (this.props.onChange) {
-      const initialInputValue = '';
+      const initialInputValue = event ? event.target.value : this.props.value.value;
       this.props.onChange(
         event, initialInputValue, this.props.name,
         this.handleValidation(initialInputValue),
