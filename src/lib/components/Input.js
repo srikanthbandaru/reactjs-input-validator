@@ -24,6 +24,7 @@ export default class Input extends Component {
 
   componentDidMount() {
     this.sendInputData();
+    if (this.props.value.value) this.handleOnBlur();
   }
 
   handleInputChange(event) {
