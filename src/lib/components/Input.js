@@ -16,7 +16,7 @@ export default class Input extends Component {
     super(props);
     this.state = { validationResult: null };
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleOnBlur = this.handleOnBlur.bind(this);
+    this.setFieldValidation = this.setFieldValidation.bind(this);
     this.handleValidation = this.handleValidation.bind(this);
     this.sendInputData = this.sendInputData.bind(this);
     this.handleOnFocus = this.handleOnFocus.bind(this);
@@ -24,11 +24,23 @@ export default class Input extends Component {
 
   componentDidMount() {
     this.sendInputData();
-    if (this.props.value.value) this.handleOnBlur();
+    if (this.props.value.value) this.setFieldValidation();
+  }
+
+  setFieldValidation(event) {
+    // checking validation result on blur even to display the error/success styles
+    const inputValue = (event && event.target.value) || this.props.value.value;
+    const { required } = this.props;
+
+    // do the validation only IF (input is empty) AND (input not required) FAILS
+    if (!(inputValue === '' && !required)) {
+      this.setState({ validationResult: this.handleValidation(inputValue) });
+    }
   }
 
   handleInputChange(event) {
     this.sendInputData(event);
+    if (this.props.validateOnChange) this.setFieldValidation(event);
   }
 
   sendInputData(event) {
@@ -45,17 +57,6 @@ export default class Input extends Component {
 
   handleOnFocus() {
     this.setState({ validationResult: null });
-  }
-
-  handleOnBlur() {
-    // checking validation result on blur even to display the error/success styles
-    const inputValue = this.props.value.value;
-    const { required } = this.props;
-
-    // do the validation only IF (input is empty) AND (input not required) FAILS
-    if (!(inputValue === '' && !required)) {
-      this.setState({ validationResult: this.handleValidation(inputValue) });
-    }
   }
 
   handleValidation(inputValue) {
@@ -82,7 +83,7 @@ export default class Input extends Component {
                 id={this.props.id}
                 value={inputValue}
                 onChange={this.handleInputChange}
-                onBlur={this.handleOnBlur}
+                onBlur={this.setFieldValidation}
                 onFocus={this.handleOnFocus}
                 ref={this.props.setRef}
               />
@@ -127,6 +128,7 @@ Input.propTypes = {
   requiredErrMsg: PropTypes.string,
   setRef: PropTypes.func,
   type: PropTypes.string,
+  validateOnChange: PropTypes.bool,
   validator: PropTypes.string,
   validatorErrMsg: PropTypes.string,
   value: PropTypes.object, // eslint-disable-line
@@ -148,6 +150,7 @@ Input.defaultProps = {
   requiredErrMsg: null,
   setRef: () => {},
   type: 'text',
+  validateOnChange: false,
   validator: null,
   validatorErrMsg: null,
   value: { value: '' },
