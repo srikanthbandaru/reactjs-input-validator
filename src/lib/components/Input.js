@@ -24,7 +24,6 @@ export default class Input extends Component {
 
   componentDidMount() {
     this.sendInputData();
-    if (this.props.value.value) this.setFieldValidation();
   }
 
   setFieldValidation(event) {
@@ -36,6 +35,7 @@ export default class Input extends Component {
     if (!(inputValue === '' && !required)) {
       this.setState({ validationResult: this.handleValidation(inputValue) });
     }
+    this.sendInputData();
   }
 
   handleInputChange(event) {
