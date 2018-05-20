@@ -60,6 +60,7 @@ export default class Input extends Component {
   }
 
   handleValidation(inputValue) {
+    if (this.props.customValidator === false) return this.props.customValidator;
     return validation(inputValue, this.props);
   }
 
@@ -100,6 +101,7 @@ export default class Input extends Component {
                   maxLength={this.props.maxLength}
                   maxLengthErrMsg={this.props.maxLengthErrMsg}
                   validatorErrMsg={this.props.validatorErrMsg}
+                  customValidatorErrMsg={this.props.customValidatorErrMsg}
                 />
               }
             </FormGroup>
@@ -113,6 +115,8 @@ export default class Input extends Component {
 
 Input.propTypes = {
   className: PropTypes.string,
+  customValidator: PropTypes.bool,
+  customValidatorErrMsg: PropTypes.string,
   id: PropTypes.string,
   label: PropTypes.string,
   length: PropTypes.number,
@@ -136,6 +140,8 @@ Input.propTypes = {
 
 Input.defaultProps = {
   className: '',
+  customValidator: null,
+  customValidatorErrMsg: null,
   id: null,
   label: null,
   length: null,
