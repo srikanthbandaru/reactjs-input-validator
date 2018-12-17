@@ -35,9 +35,9 @@ export default class App extends Component {
       // do something
       this.setState({ callAPI: true });
     } else {
-      this.setState({ callAPI: true });
+      this.setState({ callAPI: true, shouldValidateInputs: !isFormValid });
       // to do validation and display error msgs for all Inputs in the form
-      Object.keys(this.state.data).map(input => [this[input].focus(), this[input].blur()]);
+      // Object.keys(this.state.data).map(input => [this[input].focus(), this[input].blur()]);
     }
   }
 
@@ -58,9 +58,8 @@ export default class App extends Component {
               label="Full Name" name="fullName" placeholder="First Last"
               onChange={this.handleChange}
               value={this.state.data.fullName}
-              setRef={(input) => { this.fullName = input; }}
+              shouldValidateInputs={this.state.shouldValidateInputs}
             />
-
           </Col>
           <Col md={6}>
 
@@ -74,7 +73,7 @@ export default class App extends Component {
               label="Email" name="email" placeholder="Email"
               onChange={this.handleChange}
               value={this.state.data.email}
-              setRef={(input) => { this.email = input; }}
+              shouldValidateInputs={this.state.shouldValidateInputs}
             />
 
           </Col>
@@ -94,7 +93,7 @@ export default class App extends Component {
               label="Create a password" name="password" type="password" placeholder="Password"
               onChange={this.handleChange}
               value={this.state.data.password}
-              setRef={(input) => { this.password = input; }}
+              shouldValidateInputs={this.state.shouldValidateInputs}
             />
 
           </Col>
@@ -111,7 +110,7 @@ export default class App extends Component {
               label="Confirm password" name="confirmPassword" type="password" placeholder="Password"
               onChange={this.handleChange}
               value={this.state.data.confirmPassword}
-              setRef={(input) => { this.confirmPassword = input; }}
+              shouldValidateInputs={this.state.shouldValidateInputs}
             />
 
           </Col>
@@ -127,7 +126,7 @@ export default class App extends Component {
           label="Address" name="address" placeholder="1234 Main St"
           onChange={this.handleChange}
           value={this.state.data.address}
-          setRef={(input) => { this.address = input; }}
+          shouldValidateInputs={this.state.shouldValidateInputs}
         />
 
         {/*
@@ -138,7 +137,7 @@ export default class App extends Component {
           name="address2" placeholder="Apartment, studio, or floor"
           onChange={this.handleChange}
           value={this.state.data.address2}
-          setRef={(input) => { this.address2 = input; }}
+          shouldValidateInputs={this.state.shouldValidateInputs}
         />
 
         <Row>
@@ -154,7 +153,7 @@ export default class App extends Component {
               name="inputCity"
               onChange={this.handleChange}
               value={this.state.data.inputCity}
-              setRef={(input) => { this.inputCity = input; }}
+              shouldValidateInputs={this.state.shouldValidateInputs}
             />
 
           </Col>
@@ -190,7 +189,7 @@ export default class App extends Component {
               label="Zip" name="inputZip"
               onChange={this.handleChange}
               value={this.state.data.inputZip}
-              setRef={(input) => { this.inputZip = input; }}
+              shouldValidateInputs={this.state.shouldValidateInputs}
             />
           </Col>
         </Row>

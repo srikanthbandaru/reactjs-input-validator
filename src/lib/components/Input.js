@@ -6,49 +6,62 @@ import FormControl from 'react-bootstrap/lib/FormControl';
 import ErrorMessage from './ErrorMessage';
 import { supportedInputTypes } from './constants';
 
-export default function Input(props) {
-  return (
-    <div>
-      {supportedInputTypes.includes(props.type)
-            ?
-              <FormGroup controlId={props.name} validationState={props.validationState}>
-                {props.label && <ControlLabel>{props.label}</ControlLabel>}
-                <input
-                  className={props.inputClassName}
-                  type={props.type}
-                  placeholder={props.placeholder}
-                  name={props.name}
-                  id={props.id}
-                  value={props.inputValue}
-                  onChange={props.handleInputChange}
-                  onBlur={props.setFieldValidation}
-                  onFocus={props.handleOnFocus}
-                  ref={props.setRef}
-                  onKeyPress={props.onKeyPress}
-                />
-                <FormControl.Feedback />
-                {props.validationResult === false &&
-                  <ErrorMessage
-                    validator={props.validator}
-                    inputValue={props.inputValue}
-                    requiredErrMsg={props.requiredErrMsg}
-                    length={props.length}
-                    lengthErrMsg={props.lengthErrMsg}
-                    minLength={props.minLength}
-                    minLengthErrMsg={props.minLengthErrMsg}
-                    maxLength={props.maxLength}
-                    maxLengthErrMsg={props.maxLengthErrMsg}
-                    validatorErrMsg={props.validatorErrMsg}
-                    customValidatorErrMsg={props.customValidatorErrMsg}
-                  />
-                }
-              </FormGroup>
-            :
-              null
-          }
-    </div>
+export default class Input extends React.Component {
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.shouldValidateInputs &&
+      this.props.shouldValidateInputs !== prevProps.shouldValidateInputs
+    ) {
+      this[this.props.name].focus();
+      this[this.props.name].blur();
+    }
+  }
 
-  );
+  render() {
+    return (
+      <div>
+        {supportedInputTypes.includes(this.props.type)
+              ?
+                <FormGroup controlId={this.props.name} validationState={this.props.validationState}>
+                  {this.props.label && <ControlLabel>{this.props.label}</ControlLabel>}
+                  <input
+                    {...this.props}
+                    className={this.props.inputClassName}
+                    type={this.props.type}
+                    placeholder={this.props.placeholder}
+                    name={this.props.name}
+                    id={this.props.id}
+                    value={this.props.inputValue}
+                    onChange={this.props.handleInputChange}
+                    onBlur={this.props.setFieldValidation}
+                    onFocus={this.props.handleOnFocus}
+                    ref={(input) => { this[this.props.name] = input; }}
+                    onKeyPress={this.props.onKeyPress}
+                  />
+                  <FormControl.Feedback />
+                  {this.props.validationResult === false &&
+                    <ErrorMessage
+                      validator={this.props.validator}
+                      inputValue={this.props.inputValue}
+                      requiredErrMsg={this.props.requiredErrMsg}
+                      length={this.props.length}
+                      lengthErrMsg={this.props.lengthErrMsg}
+                      minLength={this.props.minLength}
+                      minLengthErrMsg={this.props.minLengthErrMsg}
+                      maxLength={this.props.maxLength}
+                      maxLengthErrMsg={this.props.maxLengthErrMsg}
+                      validatorErrMsg={this.props.validatorErrMsg}
+                      customValidatorErrMsg={this.props.customValidatorErrMsg}
+                    />
+                  }
+                </FormGroup>
+              :
+                null
+            }
+      </div>
+
+    );
+  }
 }
 
 Input.propTypes = {
@@ -70,7 +83,7 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   requiredErrMsg: PropTypes.string,
   setFieldValidation: PropTypes.func.isRequired,
-  setRef: PropTypes.func,
+  shouldValidateInputs: PropTypes.bool,
   type: PropTypes.string,
   validationResult: PropTypes.bool.isRequired,
   validationState: PropTypes.arrayOf(true, false, null).isRequired,
@@ -94,7 +107,7 @@ Input.defaultProps = {
   onKeyPress: () => {},
   placeholder: '',
   requiredErrMsg: null,
-  setRef: () => {},
+  shouldValidateInputs: false,
   type: 'text',
   validator: null,
   validatorErrMsg: null,
