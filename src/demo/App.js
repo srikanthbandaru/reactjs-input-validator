@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import './App.css';
-import { Input, formInputData, formValidation } from '../lib';
+import { Field, formInputData, formValidation } from '../lib';
+/*eslint-disable*/
 
 export default class App extends Component {
   constructor() {
@@ -52,7 +53,7 @@ export default class App extends Component {
               Input required validation check with
               library default error messages
             */}
-            <Input
+            <Field
               required
               label="Full Name" name="fullName" placeholder="First Last"
               onChange={this.handleChange}
@@ -68,7 +69,7 @@ export default class App extends Component {
               isEmail validation and
               library default error messages
             */}
-            <Input
+            <Field
               validator="isEmail" required
               label="Email" name="email" placeholder="Email"
               onChange={this.handleChange}
@@ -87,7 +88,7 @@ export default class App extends Component {
               and minimum character length validation with
               custom error msg only when minLength validation fail
             */}
-            <Input
+            <Field
               validator="isAlphanumeric" required minLength={8}
               minLengthErrMsg="Short passwords are easy to guess. Try one with atleast 8 characters"
               label="Create a password" name="password" type="password" placeholder="Password"
@@ -104,7 +105,7 @@ export default class App extends Component {
               equals validation with
               custom error msg only when equals validation fail
             */}
-            <Input
+            <Field
               validator="equals" required comparison={passwordValue}
               validatorErrMsg="These passwords don't match. Try again?"
               label="Confirm password" name="confirmPassword" type="password" placeholder="Password"
@@ -120,7 +121,7 @@ export default class App extends Component {
           Input required validation check with
           custom error msg only when required validation fail
         */}
-        <Input
+        <Field
           required
           requiredErrMsg="Enter your address so we can send you awesome stuff"
           label="Address" name="address" placeholder="1234 Main St"
@@ -132,7 +133,7 @@ export default class App extends Component {
         {/*
           No validation
         */}
-        <Input
+        <Field
           label="Address 2"
           name="address2" placeholder="Apartment, studio, or floor"
           onChange={this.handleChange}
@@ -148,7 +149,7 @@ export default class App extends Component {
               maximum character length validation with
               library default error messages
             */}
-            <Input
+            <Field
               maxLength={20} required label="City"
               name="inputCity"
               onChange={this.handleChange}
@@ -183,7 +184,7 @@ export default class App extends Component {
               maximum character length validation with
               library default error messages
             */}
-            <Input
+            <Field
               validator="isPostalCode" locale="US" required maxLength={10}
               validatorErrMsg="Enter a valid US Zip"
               label="Zip" name="inputZip"
