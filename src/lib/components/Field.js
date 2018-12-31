@@ -18,6 +18,7 @@ export default class Field extends Component {
     this.handleValidation = this.handleValidation.bind(this);
     this.sendInputData = this.sendInputData.bind(this);
     this.handleOnFocus = this.handleOnFocus.bind(this);
+    this.handleOnBlur = this.handleOnBlur.bind(this);
   }
 
   componentDidMount() {
@@ -54,7 +55,13 @@ export default class Field extends Component {
   }
 
   handleOnFocus() {
+    this.props.onFocus();
     this.setState({ validationResult: null });
+  }
+
+  handleOnBlur() {
+    this.props.onBlur();
+    this.setFieldValidation();
   }
 
   handleValidation(inputValue) {
@@ -70,6 +77,7 @@ export default class Field extends Component {
             handleInputChange={this.handleInputChange}
             setFieldValidation={this.setFieldValidation}
             handleOnFocus={this.handleOnFocus}
+            handleOnBlur={this.handleOnBlur}
             inputClassName={`form-control ${this.props.className}`}
             inputValue={this.props.value.value}
             validationState={validationState}
@@ -114,7 +122,9 @@ Field.propTypes = {
   className: PropTypes.string,
   customValidator: PropTypes.bool,
   name: PropTypes.string.isRequired,
+  onBlur: PropTypes.func,
   onChange: PropTypes.func,
+  onFocus: PropTypes.func,
   render: PropTypes.string,
   required: PropTypes.bool,
   rows: PropTypes.number,
@@ -126,7 +136,9 @@ Field.defaultProps = {
   autoExpand: false,
   className: '',
   customValidator: null,
+  onBlur: () => {},
   onChange: () => {},
+  onFocus: () => {},
   render: 'Input',
   required: false,
   rows: 1,

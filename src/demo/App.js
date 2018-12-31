@@ -41,6 +41,15 @@ export default class App extends Component {
     }
   }
 
+  onBlur() {
+    console.log('blur');
+  }
+
+  onFocus() {
+    console.log('focus');
+    
+  }
+
   render() {
     const passwordValue = this.state.data.password && this.state.data.password.value;
 
@@ -59,6 +68,8 @@ export default class App extends Component {
               onChange={this.handleChange}
               value={this.state.data.fullName}
               shouldValidateInputs={this.state.shouldValidateInputs}
+              onFocus={this.onFocus}
+              onBlur={this.onBlur}
             />
           </Col>
           <Col md={6}>

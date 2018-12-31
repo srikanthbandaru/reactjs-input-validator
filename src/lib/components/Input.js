@@ -33,7 +33,7 @@ export default class Input extends React.Component {
                     id={this.props.id}
                     value={this.props.inputValue}
                     onChange={this.props.handleInputChange}
-                    onBlur={this.props.setFieldValidation}
+                    onBlur={this.props.handleOnBlur}
                     onFocus={this.props.handleOnFocus}
                     ref={(input) => { this[this.props.name] = input; }}
                     onKeyPress={this.props.onKeyPress}
@@ -67,6 +67,7 @@ export default class Input extends React.Component {
 Input.propTypes = {
   customValidatorErrMsg: PropTypes.string,
   handleInputChange: PropTypes.func.isRequired,
+  handleOnBlur: PropTypes.func.isRequired,
   handleOnFocus: PropTypes.func.isRequired,
   id: PropTypes.string,
   inputClassName: PropTypes.string,
