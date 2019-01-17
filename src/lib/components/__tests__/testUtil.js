@@ -1,11 +1,11 @@
 /* eslint-disable function-paren-newline */
 import React from 'react';
 import { mount } from 'enzyme';
-import Input from '../Input';
+import Field from '../Field';
 
 export function itShouldDisplayError(inputProps, errorMessage, validatorWrapper) {
   const plainWrapper = mount(
-    <Input
+    <Field
       required={inputProps.required}
       name={inputProps.name}
       value={inputProps.value}
@@ -23,7 +23,7 @@ export function itShouldDisplayError(inputProps, errorMessage, validatorWrapper)
 
 export function itShouldDisplaySuccess(inputProps, validatorWrapper) {
   const plainWrapper = mount(
-    <Input
+    <Field
       required={inputProps.required}
       name={inputProps.name}
       value={inputProps.value}

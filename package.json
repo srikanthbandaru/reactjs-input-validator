@@ -102,6 +102,7 @@
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
     },
+    "modulePathIgnorePatterns": ["testUtil.js"],
     "moduleFileExtensions": [
       "web.js",
       "mjs",

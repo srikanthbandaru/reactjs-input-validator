@@ -2,7 +2,7 @@ import React from 'react';
 import { mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Chance from 'chance';
-import Input from '../Input';
+import Field from '../Field';
 import { itShouldDisplayError, itShouldDisplaySuccess } from './testUtil';
 import { validatorTestArgs, errorMessages } from '../constants';
 
@@ -51,7 +51,7 @@ describe('reactjs-input-validator', () => {
 
   Object.keys(validatorTestArgs).map((validator) => {
     describe(`for validator --${validator}--`, () => {
-      const wrapper = mount(<Input validator={validator} name={validator} />);
+      const wrapper = mount(<Field validator={validator} name={validator} />);
 
       afterEach(() => {
         wrapper.setProps({ required: false });
