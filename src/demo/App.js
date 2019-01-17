@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import './App.css';
 import { Field, formInputData, formValidation } from '../lib';
-/*eslint-disable*/
 
 export default class App extends Component {
   constructor() {
@@ -36,18 +35,7 @@ export default class App extends Component {
       this.setState({ callAPI: true });
     } else {
       this.setState({ callAPI: true, shouldValidateInputs: !isFormValid });
-      // to do validation and display error msgs for all Inputs in the form
-      // Object.keys(this.state.data).map(input => [this[input].focus(), this[input].blur()]);
     }
-  }
-
-  onBlur() {
-    console.log('blur');
-  }
-
-  onFocus() {
-    console.log('focus');
-    
   }
 
   render() {
@@ -68,8 +56,6 @@ export default class App extends Component {
               onChange={this.handleChange}
               value={this.state.data.fullName}
               shouldValidateInputs={this.state.shouldValidateInputs}
-              onFocus={this.onFocus}
-              onBlur={this.onBlur}
             />
           </Col>
           <Col md={6}>

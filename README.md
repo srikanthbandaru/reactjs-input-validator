@@ -10,13 +10,13 @@
 ## Input validator for [React][react-website] with the awesomeness of [validator.js][validatorjs-website]
 This module saves you time in three ways.
 - **Clean code.** You don't have to write custom validations for every input field in your form.  
-- **No new syntax.** You don't have to deal with any weird syntax. Pass the validations and error messages you want as props to our <Input /> component. That's it!
+- **No learning curve.** You don't have to deal with any new syntax. Pass the validations and error messages you want as props to our component and that's it!
 - **Inbuilt styles & error messages.** We ship you custom styles and error messages for the validation of your input fields along with form validation.
 
 ## Usage
 ### Basic Usage
 ```jsx
-<Input
+<Field
     validator="isEmail" required
     label="Email" name="email" placeholder="Email"
 />
@@ -34,9 +34,9 @@ To use reactjs-input-validator in your react app, you should import it first.
 
 ```js
 // ES6
-import {Input} from 'reactjs-inpupt-validator';
+import { Field } from 'reactjs-inpupt-validator';
 // or in ES5
-var Input = require('reactjs-input-validator');
+var Field = require('reactjs-input-validator');
 ```
 ### Import CSS
 Finally, you need to link bootstrap to your application.
@@ -70,7 +70,8 @@ https://srikanthbandaru.github.io/reactjs-input-validator/
 ```js
 import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
-import { Input, formInputData, formValidation } from 'reactjs-input-validator';
+import { Field, formInputData, formValidation } from 'reactjs-input-validator';
+
 
 export default class App extends Component {
   constructor() {
@@ -83,15 +84,12 @@ export default class App extends Component {
   }
 
   handleChange(event, inputValue, inputName, validationState, isRequired) {
-    const targetValue = event ? event.target.value : null;
-    const value = event ? targetValue : inputValue;
-    const name = event ? event.target.name : inputName;
+    const value = (event && event.target.value) || inputValue;
     const { data } = this.state;
-    data[name] = { value, validation: validationState, isRequired };
+    data[inputName] = { value, validation: validationState, isRequired };
     this.setState({
       data,
     });
-
     // if you want access to your form data
     const formData = formInputData(this.state.data); // eslint-disable-line no-unused-vars
     // tells you if the entire form validation is true or false
@@ -103,17 +101,15 @@ export default class App extends Component {
     const isFormValid = formValidation(this.state.data);
 
     if (isFormValid) {
-      // do something
+      // do anything including ajax calls
+      this.setState({ callAPI: true });
     } else {
-      // to do validation and display error msgs for all Inputs in the form
-      Object.keys(this.state.data).map(input => [this[input].focus(), this[input].blur()]);
+      this.setState({ callAPI: true, shouldValidateInputs: !isFormValid });
     }
   }
 
   render() {
-    const passwordValue = this.state.data.password && this.state.data.password.value
-      ? this.state.data.password.value
-      : null;
+    const passwordValue = this.state.data.password && this.state.data.password.value;
 
     return (
       <form className="example">
@@ -124,13 +120,13 @@ export default class App extends Component {
               Input required validation check with
               library default error messages
             */}
-            <Input
+            <Field
               required
               label="Full Name" name="fullName" placeholder="First Last"
               onChange={this.handleChange}
-              setRef={(input) => { this.fullName = input; }}
+              value={this.state.data.fullName}
+              shouldValidateInputs={this.state.shouldValidateInputs}
             />
-
           </Col>
           <Col md={6}>
 
@@ -139,11 +135,12 @@ export default class App extends Component {
               isEmail validation and
               library default error messages
             */}
-            <Input
+            <Field
               validator="isEmail" required
               label="Email" name="email" placeholder="Email"
               onChange={this.handleChange}
-              setRef={(input) => { this.email = input; }}
+              value={this.state.data.email}
+              shouldValidateInputs={this.state.shouldValidateInputs}
             />
 
           </Col>
@@ -157,12 +154,13 @@ export default class App extends Component {
               and minimum character length validation with
               custom error msg only when minLength validation fail
             */}
-            <Input
+            <Field
               validator="isAlphanumeric" required minLength={8}
               minLengthErrMsg="Short passwords are easy to guess. Try one with atleast 8 characters"
               label="Create a password" name="password" type="password" placeholder="Password"
               onChange={this.handleChange}
-              setRef={(input) => { this.password = input; }}
+              value={this.state.data.password}
+              shouldValidateInputs={this.state.shouldValidateInputs}
             />
 
           </Col>
@@ -173,12 +171,13 @@ export default class App extends Component {
               equals validation with
               custom error msg only when equals validation fail
             */}
-            <Input
+            <Field
               validator="equals" required comparison={passwordValue}
               validatorErrMsg="These passwords don't match. Try again?"
               label="Confirm password" name="confirmPassword" type="password" placeholder="Password"
               onChange={this.handleChange}
-              setRef={(input) => { this.confirmPassword = input; }}
+              value={this.state.data.confirmPassword}
+              shouldValidateInputs={this.state.shouldValidateInputs}
             />
 
           </Col>
@@ -188,20 +187,24 @@ export default class App extends Component {
           Input required validation check with
           custom error msg only when required validation fail
         */}
-        <Input
+        <Field
           required
           requiredErrMsg="Enter your address so we can send you awesome stuff"
           label="Address" name="address" placeholder="1234 Main St"
           onChange={this.handleChange}
-          setRef={(input) => { this.address = input; }}
+          value={this.state.data.address}
+          shouldValidateInputs={this.state.shouldValidateInputs}
         />
 
-        {/* No validation */}
-        <Input
+        {/*
+          No validation
+        */}
+        <Field
           label="Address 2"
           name="address2" placeholder="Apartment, studio, or floor"
           onChange={this.handleChange}
-          setRef={(input) => { this.address2 = input; }}
+          value={this.state.data.address2}
+          shouldValidateInputs={this.state.shouldValidateInputs}
         />
 
         <Row>
@@ -212,11 +215,12 @@ export default class App extends Component {
               maximum character length validation with
               library default error messages
             */}
-            <Input
+            <Field
               maxLength={20} required label="City"
               name="inputCity"
               onChange={this.handleChange}
-              setRef={(input) => { this.inputCity = input; }}
+              value={this.state.data.inputCity}
+              shouldValidateInputs={this.state.shouldValidateInputs}
             />
 
           </Col>
@@ -246,12 +250,13 @@ export default class App extends Component {
               maximum character length validation with
               library default error messages
             */}
-            <Input
+            <Field
               validator="isPostalCode" locale="US" required maxLength={10}
               validatorErrMsg="Enter a valid US Zip"
               label="Zip" name="inputZip"
               onChange={this.handleChange}
-              setRef={(input) => { this.inputZip = input; }}
+              value={this.state.data.inputZip}
+              shouldValidateInputs={this.state.shouldValidateInputs}
             />
           </Col>
         </Row>
@@ -259,6 +264,13 @@ export default class App extends Component {
           type="submit" onClick={this.handleSubmit} className="btn btn-primary"
         >Sign up
         </button>
+        {this.state.callAPI
+          ?
+            <pre className="resultBlock">
+              {JSON.stringify(formInputData(this.state.data), null, 4)}
+            </pre>
+          : null
+        }
       </form>
     );
   }

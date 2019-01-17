@@ -8,6 +8,7 @@
     "type": "git",
     "url": "https://github.com/SrikanthBandaru/reactjs-input-validator"
   },
+  "keywords": ["input validator", "react validation", "react input validation", "reactjs input validator", "reactjs input validation"],
   "homepage": "https://srikanthbandaru.github.io/reactjs-input-validator/",
   "description": "An input validator built for Reactjs using the awesomeness of valiidator.js",
   "scripts": {
