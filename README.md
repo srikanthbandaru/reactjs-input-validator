@@ -34,7 +34,7 @@ To use reactjs-input-validator in your react app, you should import it first.
 
 ```js
 // ES6
-import { Field } from 'reactjs-inpupt-validator';
+import { Field } from 'reactjs-input-validator';
 // or in ES5
 var Field = require('reactjs-input-validator');
 ```
